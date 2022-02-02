@@ -2,7 +2,7 @@ from tkinter import *
 
 import mysql.connector as sqltor
 
-con = sqltor.connect(host="localhost", user="root", passwd="123456", database="bank")
+con = sqltor.connect(host="localhost", user="root", passwd="R3d23@lnut", database="bank")
 if con.is_connected():
     print("Connection Successful...")
 
@@ -69,6 +69,7 @@ def Window1_Function():
         passwd2.grid(row=2, column=0, sticky='w')
         # PASSWORD textbox
         passwd_box2 = Entry(window2,
+                            show=str('*'),
                             font=("ariel", 15),
                             width=24)
         passwd_box2.grid(row=2, column=1)
@@ -89,20 +90,28 @@ def Window1_Function():
             u2 = uname_box2.get()
             p2 = passwd_box2.get()
             b2 = deposit_box2.get()
-            if n2 == '' or p2 == '' or u2 == '' or b2 == '':
+            if b2.isdigit():
+                if n2 == '' or p2 == '' or u2 == '' or b2 == '':
+                    Invalid_Label = Label(window2,
+                                          text="Invalid Values!",
+                                          fg="red",
+                                          font=("ariel", 15, "bold"))
+                    Invalid_Label.place(x=10, y=220)
+                else:
+                    q = "INSERT INTO bdetails(NAME, USERNAME,PASSWD,BALANCE)values('{}','{}','{}',{})".format(n2, u2, p2,
+                                                                                                              b2)
+                    cursor2 = con.cursor()
+                    cursor2.execute(q)
+                    con.commit()
+                    window2.destroy()
+                    Window1_Function()
+            else:
                 Invalid_Label = Label(window2,
                                       text="Invalid Values!",
                                       fg="red",
                                       font=("ariel", 15, "bold"))
                 Invalid_Label.place(x=10, y=220)
-            else:
-                q = "INSERT INTO bdetails(NAME, USERNAME,PASSWD,BALANCE)values('{}','{}','{}',{})".format(n2, u2, p2,
-                                                                                                          b2)
-                cursor2 = con.cursor()
-                cursor2.execute(q)
-                con.commit()
-                window2.destroy()
-                Window1_Function()
+                
 
         submit2 = Button(window2,
                          text="SUBMIT",
@@ -136,6 +145,7 @@ def Window1_Function():
         passwd3.grid(row=1, column=0)
         # Passwd textbox
         passwd_box3 = Entry(window3,
+                            show=str('*'),
                             font=("ariel", 15),
                             width=24)
         passwd_box3.grid(row=1, column=1)
@@ -146,7 +156,8 @@ def Window1_Function():
             window4 = Tk()
             window4.geometry("420x420")
             window4.title("Bank Details")
-            U3 = uname_box3.get()  # used in window4
+            U3 = uname_box3.get()# used in window4
+            
             window3.destroy()  ### this should not be here
             # Window4 widgets
             # Name label
@@ -221,16 +232,6 @@ def Window1_Function():
                     window6 = Tk()
                     window6.geometry("420x420")
                     window6.title("Home Loan")
-                    # Username label
-                    uname6 = Label(window6,
-                                   text=" Username : ",
-                                   font=("ariel", 15, "bold"))
-                    uname6.grid(row=0, column=0, sticky='w')
-                    # Username display label
-                    uname_box6 = Entry(window6,
-                                       font=("ariel", 15),
-                                       width=24)
-                    uname_box6.grid(row=0, column=1, sticky='w')
                     # h_principal label
                     h_principal6 = Label(window6,
                                          text=" Loan Taken : ",
@@ -265,35 +266,35 @@ def Window1_Function():
 
                     # submit button
                     def SubmitLoanFunc():
-                        u6 = uname_box6.get()
                         p6 = h_principal_box6.get()
                         r6 = 7
                         t6 = h_time_box6.get()
-                        if u6 == '' or p6 == '' or r6 == '' or t6 == '':
-                            Invalid_Label = Label(window6,
-                                                  text="Invalid Input!",
-                                                  fg="red",
-                                                  font=("ariel", 15, "bold"))
-                            Invalid_Label.place(x=10, y=220)
+                        if p6.isdigit() and t6.isdigit():
+                            if p6 == '' or r6 == '' or t6 == '':
+                                Invalid_Label = Label(window6,
+                                                      text="Invalid Input!                          ",
+                                                      fg="red",
+                                                      font=("ariel", 15, "bold"))
+                                Invalid_Label.place(x=10, y=220)
+                            elif int(t6)>15:
+                                MaxTime_Label = Label(window6,
+                                                      text="Max time is 15 years!",
+                                                      fg="red",
+                                                      font=("ariel", 15, "bold"))
+                                MaxTime_Label.place(x=10, y=220)
+                            else:
+                                q = "UPDATE bdetails SET h_principal={},h_rate={},h_time={} where USERNAME='{}'".format(p6, r6, t6,U3)
+                                cursor6 = con.cursor()
+                                cursor6.execute(q)
+                                con.commit()
+                                window6.destroy()
+                                Window1_Function()
                         else:
-                            Q = "select username from bdetails"
-                            cursor.execute(Q)
-                            datas = cursor.fetchall()
-                            for k in range(len(datas)):
-                                if u6 != datas[k][0]:
-                                    Invalid_Label = Label(window6,
-                                                          text="Invalid Username!",
-                                                          fg="red",
-                                                          font=("ariel", 15, "bold"))
-                                    Invalid_Label.place(x=10, y=220)
-                                else:
-                                    q = "UPDATE bdetails SET h_principal={},h_rate={},h_time={} where USERNAME='{}'".format(
-                                        p6, r6, t6, u6)
-                                    cursor6 = con.cursor()
-                                    cursor6.execute(q)
-                                    con.commit()
-                                    window6.destroy()
-                                    Window1_Function()
+                            Invalid_Label = Label(window6,
+                                                      text="Invalid Input!                             ",
+                                                      fg="red",
+                                                      font=("ariel", 15, "bold"))
+                            Invalid_Label.place(x=10, y=220)
 
                     submit6 = Button(window6,
                                      text="SUBMIT",
@@ -308,16 +309,6 @@ def Window1_Function():
                     window7 = Tk()
                     window7.geometry("420x420")
                     window7.title("Car Loan")
-                    # Username label
-                    uname7 = Label(window7,
-                                   text=" Username : ",
-                                   font=("ariel", 15, "bold"))
-                    uname7.grid(row=0, column=0, sticky='w')
-                    # Username display label
-                    uname_box7 = Entry(window7,
-                                       font=("ariel", 15),
-                                       width=24)
-                    uname_box7.grid(row=0, column=1, sticky='w')
                     # c_principal label
                     c_principal7 = Label(window7,
                                          text=" Loan Taken : ",
@@ -352,35 +343,36 @@ def Window1_Function():
 
                     # submit button
                     def SubmitLoanFunc():
-                        u7 = uname_box7.get()
                         p7 = c_principal_box7.get()
                         r7 = 6
                         t7 = c_time_box7.get()
-                        if u7 == '' or p7 == '' or r7 == '' or t7 == '':
-                            Invalid_Label = Label(window7,
-                                                  text="Invalid Input!",
-                                                  fg="red",
-                                                  font=("ariel", 15, "bold"))
-                            Invalid_Label.place(x=10, y=220)
+                        if p7.isdigit() and t7.isdigit():
+                            if p7 == '' or r7 == '' or t7 == '':
+                                Invalid_Label = Label(window7,
+                                                      text="Invalid Input!                       ",
+                                                      fg="red",
+                                                      font=("ariel", 15, "bold"))
+                                Invalid_Label.place(x=10, y=220)
+                            elif int(t7)>10:
+                                MaxTime_Label = Label(window7,
+                                                      text="Max time is 10 years!",
+                                                      fg="red",
+                                                      font=("ariel", 15, "bold"))
+                                MaxTime_Label.place(x=10, y=220)
+                            else:
+                                q = "UPDATE bdetails SET c_principal={},c_rate={},c_time={} where USERNAME='{}'".format(p7, r7, t7, U3)
+                                cursor6 = con.cursor()
+                                cursor6.execute(q)
+                                con.commit()
+                                window7.destroy()
+                                Window1_Function()
                         else:
-                            Q = "select username from bdetails"
-                            cursor.execute(Q)
-                            datas = cursor.fetchall()
-                            for k in range(len(datas)):
-                                if u7 != datas[k][0]:
-                                    Invalid_Label = Label(window7,
-                                                          text="Invalid Username!",
-                                                          fg="red",
-                                                          font=("ariel", 15, "bold"))
-                                    Invalid_Label.place(x=10, y=220)
-                                else:
-                                    q = "UPDATE bdetails SET c_principal={},c_rate={},c_time={} where USERNAME='{}'".format(
-                                        p7, r7, t7, u7)
-                                    cursor6 = con.cursor()
-                                    cursor6.execute(q)
-                                    con.commit()
-                                    window7.destroy()
-                                    Window1_Function()
+                            Invalid_Label = Label(window7,
+                                                      text="Invalid Input!                      ",
+                                                      fg="red",
+                                                      font=("ariel", 15, "bold"))
+                            Invalid_Label.place(x=10, y=220)
+                            
 
                     submit7 = Button(window7,
                                      text="SUBMIT",
@@ -395,16 +387,6 @@ def Window1_Function():
                     window8 = Tk()
                     window8.geometry("420x420")
                     window8.title("Personal Loan")
-                    # Username label
-                    uname8 = Label(window8,
-                                   text=" Username : ",
-                                   font=("ariel", 15, "bold"))
-                    uname8.grid(row=0, column=0, sticky='w')
-                    # Username display label
-                    uname_box8 = Entry(window8,
-                                       font=("ariel", 15),
-                                       width=24)
-                    uname_box8.grid(row=0, column=1, sticky='w')
                     # p_principal label
                     p_principal8 = Label(window8,
                                          text=" Loan Taken : ",
@@ -439,35 +421,36 @@ def Window1_Function():
 
                     # submit button
                     def SubmitLoanFunc():
-                        u8 = uname_box8.get()
                         p8 = p_principal_box8.get()
                         r8 = 5
                         t8 = p_time_box8.get()
-                        if u8 == '' or p8 == '' or r8 == '' or t8 == '':
-                            Invalid_Label = Label(window8,
-                                                  text="Invalid Input!",
-                                                  fg="red",
-                                                  font=("ariel", 15, "bold"))
-                            Invalid_Label.place(x=10, y=220)
+                        if p8.isdigit() and t8.isdigit():
+                            if p8 == '' or r8 == '' or t8 == '':
+                                Invalid_Label = Label(window8,
+                                                      text="Invalid Input!                   ",
+                                                      fg="red",
+                                                      font=("ariel", 15, "bold"))
+                                Invalid_Label.place(x=10, y=220)
+                            elif int(t8)>8:
+                                MaxTime_Label = Label(window8,
+                                                      text="Max time is 8 years!",
+                                                      fg="red",
+                                                      font=("ariel", 15, "bold"))
+                                MaxTime_Label.place(x=10, y=220)  
+                            else:
+                                q = "UPDATE bdetails SET p_principal={},p_rate={},p_time={} where USERNAME='{}'".format(p8, r8, t8,U3)
+                                cursor6 = con.cursor()
+                                cursor6.execute(q)
+                                con.commit()
+                                window8.destroy()
+                                Window1_Function()
                         else:
-                            Q = "select username from bdetails"
-                            cursor.execute(Q)
-                            datas = cursor.fetchall()
-                            for k in range(len(datas)):
-                                if u8 != datas[k][0]:
-                                    Invalid_Label = Label(window8,
-                                                          text="Invalid Username!",
-                                                          fg="red",
-                                                          font=("ariel", 15, "bold"))
-                                    Invalid_Label.place(x=10, y=220)
-                                else:
-                                    q = "UPDATE bdetails SET p_principal={},p_rate={},p_time={} where USERNAME='{}'".format(
-                                        p8, r8, t8, u8)
-                                    cursor6 = con.cursor()
-                                    cursor6.execute(q)
-                                    con.commit()
-                                    window8.destroy()
-                                    Window1_Function()
+                            Invalid_Label = Label(window8,
+                                                      text="Invalid Input!                           ",
+                                                      fg="red",
+                                                      font=("ariel", 15, "bold"))
+                            Invalid_Label.place(x=10, y=220)
+                            
 
                     submit8 = Button(window8,
                                      text="SUBMIT",
@@ -532,56 +515,42 @@ def Window1_Function():
                 window9.geometry("423x423")
                 window9.title("Deposit Balance")
                 window4.destroy()
-                # Username label
-                uname9 = Label(window9,
-                               text=" Username          : ",
-                               font=("ariel", 15, "bold"))
-                uname9.grid(row=0, column=0, sticky='w')
-                # Username display label
-                uname_box9 = Entry(window9,
-                                   font=("ariel", 15),
-                                   width=21)
-                uname_box9.grid(row=0, column=1, sticky='w')
                 # Deposit Amount label
                 Deposit_Amt = Label(window9,
                                     text=" Deposit Amount : ",
                                     font=("ariel", 15, "bold"))
-                Deposit_Amt.grid(row=1, column=0, sticky='w')
+                Deposit_Amt.grid(row=0, column=0, sticky='w')
                 # Deposit amt display label
                 DepositAmt_box9 = Entry(window9,
                                         font=("ariel", 15),
                                         width=21)
-                DepositAmt_box9.grid(row=1, column=1, sticky='w')
+                DepositAmt_box9.grid(row=0, column=1, sticky='w')
 
                 # submit button
                 def DepositFunc():
-                    u9 = uname_box9.get()
-                    d9 = DepositAmt_box9.get()
-                    if u9 == '' or d9 == '':
+                    d9 = str(DepositAmt_box9.get())
+                    if d9.isdigit() and int(d9)>0 and int(d9)<100000:                        
+                        q = "update bdetails set balance=balance+'{}' where username = '{}'".format(d9, U3)
+                        cursor9 = con.cursor()
+                        cursor9.execute(q)
+                        con.commit()
+                        window9.destroy()
+                        Window1_Function()
+                    elif int(d9)>100000:
+                        Limit_Label = Label(window9,
+                                              text="Max deposit ₹100000!",
+                                              fg="red",
+                                              font=("ariel", 15, "bold"))
+                        Limit_Label.place(x=10, y=220)
+                        
+
+                    else:
                         Invalid_Label = Label(window9,
-                                              text="Invalid Input!",
+                                              text="Invalid Input!                   ",
                                               fg="red",
                                               font=("ariel", 15, "bold"))
                         Invalid_Label.place(x=10, y=220)
-                    else:
-                        Q = "select username from bdetails"
-                        cursor.execute(Q)
-                        datas = cursor.fetchall()
-                        for k in range(len(datas)):
-                            if u9 != datas[k][0]:
-                                Invalid_Label = Label(window9,
-                                                      text="Invalid Username!",
-                                                      fg="red",
-                                                      font=("ariel", 15, "bold"))
-                                Invalid_Label.place(x=10, y=220)
-                            else:
-                                q = "update bdetails set balance=balance+'{}' where username = '{}'".format(d9, u9)
-                                cursor9 = con.cursor()
-                                cursor9.execute(q)
-                                con.commit()
-                                window9.destroy()
-                                Window1_Function()
-
+                        
                 submit9 = Button(window9,
                                  text="DEPOSIT & EXIT",
                                  font=("ariel", 15, "bold"),
@@ -605,16 +574,6 @@ def Window1_Function():
                 window10.geometry("420x420")
                 window10.title("Withdraw Balance")
                 window4.destroy()
-                # Username label
-                uname10 = Label(window10,
-                                text=" Username             : ",
-                                font=("ariel", 15, "bold"))
-                uname10.grid(row=0, column=0, sticky='w')
-                # Username display label
-                uname_box10 = Entry(window10,
-                                    font=("ariel", 15),
-                                    width=19)
-                uname_box10.grid(row=0, column=1, sticky='w')
                 # Withdraw Amount label
                 Withdraw_Amt = Label(window10,
                                      text=" Withdraw Amount : ",
@@ -628,46 +587,35 @@ def Window1_Function():
 
                 # submit button
                 def WithdrawFunc():
-                    u10 = uname_box10.get()
-                    w10 = WithdrawAmt_box10.get()
-                    if u10 == '' or w10 == '':
+                    w10 = str(WithdrawAmt_box10.get())
+                    if w10.isdigit() and int(w10)>0:
+                        m = "select balance from bdetails where username='{}'".format(U3)
+                        cursor11 = con.cursor()
+                        cursor11.execute(m)
+                        data10 = cursor11.fetchall()
+                        print(data10)
+                        if int(w10) > data10[0][0]:
+                            Invalid_Label = Label(window10,
+                                                  text="Insufficient balance!             ",
+                                                  fg="red",
+                                                  font=("ariel", 15, "bold"))
+                            Invalid_Label.place(x=10, y=120)
+                             
+                        else:
+                            q = "update bdetails set balance=balance-{} where username='{}' and balance >= '{}'".format(w10, U3, w10)
+                            cursor10 = con.cursor()
+                            cursor10.execute(q)
+                            con.commit()
+                            window10.destroy()
+                            Window1_Function()
+                        
+                    else:
+                        
                         Invalid_Label = Label(window10,
                                               text="Invalid Input!",
                                               fg="red",
                                               font=("ariel", 15, "bold"))
                         Invalid_Label.place(x=10, y=120)
-                    else:
-                        Q = "select username from bdetails"
-                        cursor.execute(Q)
-                        datas = cursor.fetchall()
-                        for k in range(len(datas)):
-                            if u10 != datas[k][0]:
-                                Invalid_Label = Label(window10,
-                                                      text="Invalid Username!                ",
-                                                      fg="red",
-                                                      font=("ariel", 15, "bold"))
-                                Invalid_Label.place(x=10, y=120)
-                            else:
-                                m = "select balance from bdetails where username='{}'".format(u10)
-                                cursor11 = con.cursor()
-                                cursor11.execute(m)
-                                data10 = cursor11.fetchall()
-                                print(data10)
-                                if int(w10) > data10[0][0]:
-                                    Invalid_Label = Label(window10,
-                                                          text="Insufficient balance!             ",
-                                                          fg="red",
-                                                          font=("ariel", 15, "bold"))
-                                    Invalid_Label.place(x=10, y=120)
-                                    break
-                                else:
-                                    q = "update bdetails set balance=balance-{} where username='{}' and balance >= '{}'".format(
-                                        w10, u10, w10)
-                                    cursor10 = con.cursor()
-                                    cursor10.execute(q)
-                                    con.commit()
-                                    window10.destroy()
-                                    Window1_Function()
 
                 submit10 = Button(window10,
                                   text="WITHDRAW & EXIT",
@@ -685,28 +633,31 @@ def Window1_Function():
                                        padx=10,
                                        command=Window10_Function)
             WithdrawAmtButton.place(x=115, y=320)
+            
 
             ##(Window11)Loan Window
             def Window11_Function():
                 window11 = Tk()
                 window11.geometry("423x423")
                 window11.title("Loan Details")
-                window4.destroy()
+                
+                
+                #window4.destroy()
                 # h_principal label
-                H_LoanTakenLabel4 = Label(window11,
+                H_LoanTakenLabel11 = Label(window11,
                                           text=" HOME LOAN             : ",
                                           font=("ariel", 15, "bold"))
-                H_LoanTakenLabel4.grid(row=4, column=0, sticky='w')
+                H_LoanTakenLabel11.grid(row=0, column=0, sticky='w')
                 # c_principal label
-                C_LoanTakenLabel4 = Label(window11,
+                C_LoanTakenLabel11 = Label(window11,
                                           text=" CAR LOAN                : ",
                                           font=("ariel", 15, "bold"))
-                C_LoanTakenLabel4.grid(row=5, column=0, sticky='w')
+                C_LoanTakenLabel11.grid(row=1, column=0, sticky='w')
                 # p_principal label
-                P_LoanTakenLabel4 = Label(window11,
+                P_LoanTakenLabel11 = Label(window11,
                                           text=" PERSONAL LOAN     : ",
                                           font=("ariel", 15, "bold"))
-                P_LoanTakenLabel4.grid(row=6, column=0, sticky='w')
+                P_LoanTakenLabel11.grid(row=2, column=0, sticky='w')
 
                 # Labels to Display values from SQL
                 cursor = con.cursor()
@@ -715,31 +666,37 @@ def Window1_Function():
                 cursor.execute(q)
                 data = cursor.fetchall()
                 for i in data:
-                    e, f, g = i[0], i[1], i[2]
-                    print(type(e))
-                    # h_principalValue label
-                    var5 = IntVar()
-                    var5.set(e)
-                    h_principalVal11 = Label(window11,
-                                            textvariable=var5,
-                                            font=("ariel", 15, "bold"))
-                    h_principalVal11.grid(row=4, column=1, sticky='w')
+                
+                     e, f, g = i[0],i[1],i[2]
+                        
+                     e=str(e)
+                     f=str(f)
+                     g=str(g)
+                     print(type(e))
+                     print(data)
 
-                    # c_principalValue label
-                    var6 = IntVar()
-                    var6.set(f)
-                    c_principalVal11 = Label(window11,
-                                            textvariable=var6,
-                                            font=("ariel", 15, "bold"))
-                    c_principalVal11.grid(row=5, column=1, sticky='w')
+                     #h_principalValue label 
+                     h_principalVal11 = Label(window11,
+                                              text=e,
+                                              font=("ariel", 15, "bold"))
+
+
+                     h_principalVal11.grid(row=0, column=1, sticky='w')
+                     
+
+                     #c_principalValue label
+
+                     c_principalVal11 = Label(window11,
+                                              text=f,
+                                              font=("ariel", 15, "bold"))
+                     c_principalVal11.grid(row=1, column=1, sticky='w')
 
                     # p_principalValue label
-                    var7 = IntVar()
-                    var7.set(g)
-                    p_principalVal11 = Label(window11,
-                                            textvariable=var7,
-                                            font=("ariel", 15, "bold"))
-                    p_principalVal11.grid(row=6, column=1, sticky='w')
+
+                     p_principalVal11 = Label(window11,
+                                              text=g,
+                                              font=("ariel", 15, "bold"))
+                     p_principalVal11.grid(row=2, column=1, sticky='w')
 
             # Button Code
             LoanDetailsButton = Button(window4,
