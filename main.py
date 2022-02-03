@@ -90,28 +90,39 @@ def Window1_Function():
             u2 = uname_box2.get()
             p2 = passwd_box2.get()
             b2 = deposit_box2.get()
-            if b2.isdigit():
-                if n2 == '' or p2 == '' or u2 == '' or b2 == '':
+            cursor=con.cursor()
+            q="select username from bdetails"
+            cursor.execute(q)
+            data=cursor.fetchall()
+            datalst=[item for t in data for item in t]
+            if n2.isalnum() and u2.isalnum() and p2.isalnum() and b2.isdigit():
+                if u2 not in datalst:
+                    if int(b2)>=1000:
+                        q = "INSERT INTO bdetails(NAME, USERNAME,PASSWD,BALANCE)values('{}','{}','{}',{})".format(n2, u2, p2,b2)
+                        cursor2 = con.cursor()
+                        cursor2.execute(q)
+                        con.commit()
+                        window2.destroy()
+                        Window1_Function()
+                    else:
+                        Invalid_Label = Label(window2,
+                                          text="Minimum deposit ₹1000!",
+                                          fg="red",
+                                          font=("ariel", 15, "bold"))
+                        Invalid_Label.place(x=10, y=220)       
+                else:
                     Invalid_Label = Label(window2,
-                                          text="Invalid Values!",
+                                          text="Username already exists!",
                                           fg="red",
                                           font=("ariel", 15, "bold"))
                     Invalid_Label.place(x=10, y=220)
-                else:
-                    q = "INSERT INTO bdetails(NAME, USERNAME,PASSWD,BALANCE)values('{}','{}','{}',{})".format(n2, u2, p2,
-                                                                                                              b2)
-                    cursor2 = con.cursor()
-                    cursor2.execute(q)
-                    con.commit()
-                    window2.destroy()
-                    Window1_Function()
+                    
             else:
                 Invalid_Label = Label(window2,
-                                      text="Invalid Values!",
-                                      fg="red",
-                                      font=("ariel", 15, "bold"))
+                                          text="Invalid Values!                               ",
+                                          fg="red",
+                                          font=("ariel", 15, "bold"))
                 Invalid_Label.place(x=10, y=220)
-                
 
         submit2 = Button(window2,
                          text="SUBMIT",
@@ -282,8 +293,20 @@ def Window1_Function():
                                                       fg="red",
                                                       font=("ariel", 15, "bold"))
                                 MaxTime_Label.place(x=10, y=220)
+                            elif int(p6)>5*int(d):
+                                MaxHLoan_Label = Label(window6,
+                                                      text="Loan Criteria not met!",
+                                                      fg="red",
+                                                      font=("ariel", 15, "bold"))
+                                MaxHLoan_Label.place(x=10, y=220)
+                                MaxHLoan_Label2 = Label(window6,
+                                                      text="*Maximum loan allowance is 5x account balance.",
+                                                      fg="black",
+                                                      font=("ariel", 10, "bold"))
+                                MaxHLoan_Label2.place(x=10, y=250)
+                                
                             else:
-                                q = "UPDATE bdetails SET h_principal={},h_rate={},h_time={} where USERNAME='{}'".format(p6, r6, t6,U3)
+                                q = "UPDATE bdetails SET h_principal={},h_rate={},h_time={},h_date=curdate() where USERNAME='{}'".format(p6, r6, t6,U3)
                                 cursor6 = con.cursor()
                                 cursor6.execute(q)
                                 con.commit()
@@ -359,8 +382,19 @@ def Window1_Function():
                                                       fg="red",
                                                       font=("ariel", 15, "bold"))
                                 MaxTime_Label.place(x=10, y=220)
+                            elif int(p7)>5*int(d):
+                                MaxHLoan_Label = Label(window7,
+                                                      text="Loan Criteria not met!",
+                                                      fg="red",
+                                                      font=("ariel", 15, "bold"))
+                                MaxHLoan_Label.place(x=10, y=220)
+                                MaxHLoan_Label2 = Label(window7,
+                                                      text="*Maximum loan allowance is 5x account balance.",
+                                                      fg="black",
+                                                      font=("ariel", 10, "bold"))
+                                MaxHLoan_Label2.place(x=10, y=250)
                             else:
-                                q = "UPDATE bdetails SET c_principal={},c_rate={},c_time={} where USERNAME='{}'".format(p7, r7, t7, U3)
+                                q = "UPDATE bdetails SET c_principal={},c_rate={},c_time={},c_date=curdate() where USERNAME='{}'".format(p7, r7, t7, U3)
                                 cursor6 = con.cursor()
                                 cursor6.execute(q)
                                 con.commit()
@@ -436,9 +470,20 @@ def Window1_Function():
                                                       text="Max time is 8 years!",
                                                       fg="red",
                                                       font=("ariel", 15, "bold"))
-                                MaxTime_Label.place(x=10, y=220)  
+                                MaxTime_Label.place(x=10, y=220)
+                            elif int(p8)>5*int(d):
+                                MaxHLoan_Label = Label(window8,
+                                                      text="Loan Criteria not met!",
+                                                      fg="red",
+                                                      font=("ariel", 15, "bold"))
+                                MaxHLoan_Label.place(x=10, y=220)
+                                MaxHLoan_Label2 = Label(window8,
+                                                      text="*Maximum loan allowance is 5x account balance.",
+                                                      fg="black",
+                                                      font=("ariel", 10, "bold"))
+                                MaxHLoan_Label2.place(x=10, y=250)
                             else:
-                                q = "UPDATE bdetails SET p_principal={},p_rate={},p_time={} where USERNAME='{}'".format(p8, r8, t8,U3)
+                                q = "UPDATE bdetails SET p_principal={},p_rate={},p_time={},p_date=curdate() where USERNAME='{}'".format(p8, r8, t8,U3)
                                 cursor6 = con.cursor()
                                 cursor6.execute(q)
                                 con.commit()
@@ -635,14 +680,12 @@ def Window1_Function():
             WithdrawAmtButton.place(x=115, y=320)
             
 
-            ##(Window11)Loan Window
+            ##(Window11)Loan Details Window
             def Window11_Function():
                 window11 = Tk()
                 window11.geometry("423x423")
                 window11.title("Loan Details")
-                
-                
-                #window4.destroy()
+                window4.destroy()
                 # h_principal label
                 H_LoanTakenLabel11 = Label(window11,
                                           text=" HOME LOAN             : ",
@@ -662,19 +705,46 @@ def Window1_Function():
                 # Labels to Display values from SQL
                 cursor = con.cursor()
 
+
+                def HomeLoanDetails():
+
+
+
+                    
+                ##Home Loan Button
+                HomeLoanButton11 = Button(window11,
+                                        text="HOME LOAN DETAILS",
+                                        font=("Arial", 12, "bold"),
+                                        bg="light grey",
+                                        padx=30,
+                                        )
+                HomeLoanButton11.place(x=90, y=150)
+                ##Car Loan Button
+                CarLoanButton11 = Button(window11,
+                                       text="CAR LOAN DETAILS",
+                                       font=("Arial", 12, "bold"),
+                                       bg="light grey",
+                                       padx=36,
+                                       )
+                CarLoanButton11.place(x=90, y=220)
+                ##Personal Loan Button
+                PersonalLoanButton11 = Button(window11,
+                                            text="PERSONAL LOAN DETAILS",
+                                            font=("Arial", 12, "bold"),
+                                            bg="light grey",
+                                            padx=10,
+                                            )
+                PersonalLoanButton11.place(x=90, y=290)
+
+
                 q = "select h_principal,c_principal,p_principal from bdetails where USERNAME = '{}'".format(b)
                 cursor.execute(q)
                 data = cursor.fetchall()
                 for i in data:
-                
-                     e, f, g = i[0],i[1],i[2]
-                        
+                     e, f, g = i[0],i[1],i[2]   
                      e=str(e)
                      f=str(f)
                      g=str(g)
-                     print(type(e))
-                     print(data)
-
                      #h_principalValue label 
                      h_principalVal11 = Label(window11,
                                               text=e,
