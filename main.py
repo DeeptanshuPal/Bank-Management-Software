@@ -2,7 +2,7 @@ from tkinter import *
 
 import mysql.connector as sqltor
 
-con = sqltor.connect(host="localhost", user="root", passwd="R3d23@lnut", database="bank")
+con = sqltor.connect(host="localhost", user="root", passwd="", database="bank")
 if con.is_connected():
     print("Connection Successful...")
 
@@ -799,21 +799,193 @@ def Window1_Function():
                                           padx=30,
                                           command=HomeLoanDetails)
                 HomeLoanButton11.place(x=90, y=150)
+
+                def CarLoanDetails():
+                    window13 = Tk()
+                    window13.title("Home Loan Details")
+                    window13.geometry('420x420')
+                    window11.destroy()
+
+                    # Labels
+                    PLabel13 = Label(window13, text='LOAN TAKEN         :₹', font=("ariel", 15, "bold"))
+                    PLabel13.place(x=10, y=5)
+
+                    RLabel13 = Label(window13, text='INTEREST RATE         :', font=("ariel", 15, "bold"))
+                    RLabel13.place(x=9, y=35)
+
+                    TLabel3 = Label(window13, text='TIME IN YEAR              :', font=("ariel", 15, "bold"))
+                    TLabel3.place(x=8, y=65)
+
+                    SdLabel13 = Label(window13, text='START DATE                :', font=("ariel", 15, "bold"))
+                    SdLabel13.place(x=9, y=95)
+
+                    SdLabel13 = Label(window13, text='END DATE                  :', font=("ariel", 15, "bold"))
+                    SdLabel13.place(x=9, y=125)
+
+                    #GETTING VALUES FROM SQL
+                    q3="select c_time from bdetails"
+                    cursor.execute(q3)
+                    data3=cursor.fetchall()
+                    for i in data3:
+                        Ct=i[0]
+
+                    q4="select c_principal,c_rate,c_time,c_date,date_add(c_date,interval '{}' year) from bdetails where username='{}'".format(Ct,U3)
+                    cursor.execute(q4)
+                    data4=cursor.fetchall()
+                    for i in data4:
+                        p2,r2,t2,sd2,ed2=i[0],i[1],i[2],i[3],i[4]
+                    print(p2,r2,t2,sd2,ed2)
+
+                    # Labels
+                    PvalLabel13 = Label(window13, text=str(p2),font=("ariel", 15, "bold"))
+                    PvalLabel13.place(x=250, y=5)
+
+                    RvalLabel13 = Label(window13, text=str(r2), font=("ariel", 15, "bold"))
+                    RvalLabel13.place(x=250, y=35)
+
+                    TvalLabel13 = Label(window13, text=str(t2), font=("ariel", 15, "bold"))
+                    TvalLabel13.place(x=250, y=65)
+
+                    SDvalLabel13 = Label(window13, text=str(sd2), font=("ariel", 15, "bold"))
+                    SDvalLabel13.place(x=250, y=95)
+
+                    EDvalLabel13 = Label(window13, text=str(ed2), font=("ariel", 15, "bold"))
+                    EDvalLabel13.place(x=250, y=125)
+
+                    ##Output
+                    # MonthlyPay Label
+                    tpaymentLabe2 = Label(window13, text='TOTAL AMOUNT:', font=("ariel", 15, "bold"))
+                    tpaymentLabe2.place(x=10, y=155)
+                    mpaymentLabe2 = Label(window13, text='MONTHLY PAYEMNT:', font=("ariel", 15, "bold"))
+                    mpaymentLabe2.place(x=10, y=185)
+                    # MPVal Label
+                    Output3 = StringVar()
+                    Output4=StringVar()
+                    p2 = float(p2)
+                    r2 = float(r2)  
+                    t2 = float(t2)
+                    total2 = p2*((1+(r2/100))**t2)
+                    mtotal2=total2/(t2*12)
+                    # output
+                    Output3.set("₹" + str(round(total2, 2)))
+                    label3 = Label(window13, textvariable=Output3, font=("ariel", 15, "bold"))
+                    label3.place(x=255, y=155)
+                    Output4.set("₹" + str(round(mtotal2, 2)))
+                    label4 = Label(window13, textvariable=Output4, font=("ariel", 15, "bold"))
+                    label4.place(x=255, y=185)
+        
+                    # Close Window Button
+                    def closewindow13():
+                        window13.destroy()
+                        Window1_Function()
+
+                    closeButton = Button(window13, text="Close", font=("ariel", 15, "bold"), padx=55, bg='light grey',
+                                         command=closewindow13)
+                    closeButton.place(x=110, y=235)
+
+
+
                 ##Car Loan Button
                 CarLoanButton11 = Button(window11,
                                          text="CAR LOAN DETAILS",
                                          font=("Arial", 12, "bold"),
                                          bg="light grey",
                                          padx=36,
-                                         )
+                                         command=CarLoanDetails)
                 CarLoanButton11.place(x=90, y=220)
+
+
+
+                def PersonalLoanDetails():
+                    window14 = Tk()
+                    window14.title("Home Loan Details")
+                    window14.geometry('420x420')
+                    window11.destroy()
+
+                    # Labels
+                    PLabel14 = Label(window14, text='LOAN TAKEN         :₹', font=("ariel", 15, "bold"))
+                    PLabel14.place(x=10, y=5)
+
+                    RLabel14 = Label(window14, text='INTEREST RATE         :', font=("ariel", 15, "bold"))
+                    RLabel14.place(x=9, y=35)
+
+                    TLabel4 = Label(window14, text='TIME IN YEAR              :', font=("ariel", 15, "bold"))
+                    TLabel4.place(x=8, y=65)
+
+                    SdLabel14 = Label(window14, text='START DATE                :', font=("ariel", 15, "bold"))
+                    SdLabel14.place(x=9, y=95)
+
+                    SdLabel14 = Label(window14, text='END DATE                  :', font=("ariel", 15, "bold"))
+                    SdLabel14.place(x=9, y=125)
+
+                    #GETTING VALUES FROM SQL
+                    q5="select c_time from bdetails"
+                    cursor.execute(q5)
+                    data5=cursor.fetchall()
+                    for i in data5:
+                        Pt=i[0]
+
+                    q6="select p_principal,p_rate,p_time,p_date,date_add(p_date,interval '{}' year) from bdetails where username='{}'".format(Pt,U3)
+                    cursor.execute(q6)
+                    data6=cursor.fetchall()
+                    for i in data6:
+                        p3,r3,t3,sd3,ed3=i[0],i[1],i[2],i[3],i[4]
+                    print(p3,r3,t3,sd3,ed3)
+
+                    # Labels
+                    PvalLabel14 = Label(window14, text=str(p3),font=("ariel", 15, "bold"))
+                    PvalLabel14.place(x=250, y=5)
+
+                    RvalLabel14 = Label(window14, text=str(r3), font=("ariel", 15, "bold"))
+                    RvalLabel14.place(x=250, y=35)
+
+                    TvalLabel14 = Label(window14, text=str(t3), font=("ariel", 15, "bold"))
+                    TvalLabel14.place(x=250, y=65)
+
+                    SDvalLabel14 = Label(window14, text=str(sd3), font=("ariel", 15, "bold"))
+                    SDvalLabel14.place(x=250, y=95)
+
+                    EDvalLabel14 = Label(window14, text=str(ed3), font=("ariel", 15, "bold"))
+                    EDvalLabel14.place(x=250, y=125)
+
+                    ##Output
+                    # MonthlyPay Label
+                    tpaymentLabe3 = Label(window14, text='TOTAL AMOUNT:', font=("ariel", 15, "bold"))
+                    tpaymentLabe3.place(x=10, y=155)
+                    mpaymentLabe3 = Label(window14, text='MONTHLY PAYEMNT:', font=("ariel", 15, "bold"))
+                    mpaymentLabe3.place(x=10, y=185)
+                    # MPVal Label
+                    Output5 = StringVar()
+                    Output6=StringVar()
+                    p3 = float(p3)
+                    r3 = float(r3)  
+                    t3 = float(t3)
+                    total3 = p3*((1+(r3/100))**t3)
+                    mtotal3=total3/(t3*12)
+                    # output
+                    Output5.set("₹" + str(round(total3, 2)))
+                    label5 = Label(window14, textvariable=Output5, font=("ariel", 15, "bold"))
+                    label5.place(x=255, y=155)
+                    Output6.set("₹" + str(round(mtotal3, 2)))
+                    label6 = Label(window14, textvariable=Output6, font=("ariel", 15, "bold"))
+                    label6.place(x=255, y=185)
+        
+                    # Close Window Button
+                    def closewindow14():
+                        window14.destroy()
+                        Window1_Function()
+
+                    closeButton = Button(window14, text="Close", font=("ariel", 15, "bold"), padx=55, bg='light grey',
+                                         command=closewindow14
+                                         )
+                    closeButton.place(x=110, y=235)
                 ##Personal Loan Button
                 PersonalLoanButton11 = Button(window11,
                                               text="PERSONAL LOAN DETAILS",
                                               font=("Arial", 12, "bold"),
                                               bg="light grey",
                                               padx=10,
-                                              )
+                                              command=PersonalLoanDetails)
                 PersonalLoanButton11.place(x=90, y=290)
 
                 q = "select h_principal,c_principal,p_principal from bdetails where USERNAME = '{}'".format(b)
