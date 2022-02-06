@@ -10,14 +10,14 @@ if con.is_connected():
 def Window1_Function():
     ### (Window1)Welcome window
     window1 = Tk()
-    window1.geometry("495x800+0+0")                     #####BG Image = 491x790
+    window1.geometry("495x800+0+0")  #####BG Image = 491x790
     window1.title("Welcome Page")
     # window1 icon and image
     icon = PhotoImage(file="Window_Thumbnail.png")
     logo = PhotoImage(file="Bank-Logo.png")
     BG = PhotoImage(file="MS_Background5.png")
     BackgroundImg = Label(window1, image=BG)
-    BackgroundImg.place(x=0,y=0)
+    BackgroundImg.place(x=0, y=0)
     window1.iconphoto(True, icon)
     bank_img = Label(window1, image=logo, padx=50)
     bank_img.place(x=40, y=145)
@@ -39,50 +39,50 @@ def Window1_Function():
         BackgroundImg.image = BG
         WindowPic = PhotoImage(file="CreateAccPic.png")
         WindowImg = Label(window2, image=WindowPic)
-        WindowImg.place(x=200, y=120)                     ######WindowImg size = 96x96
+        WindowImg.place(x=200, y=120)  ######WindowImg size = 96x96
         WindowImg.image = WindowPic
 
         # Name label
         name2 = Label(window2,
                       text="NAME           :",
                       font=("ariel", 15, "bold"))
-        name2.place(x=43,y=235)
+        name2.place(x=43, y=235)
         # Name textbox
         name_box2 = Entry(window2,
                           font=("ariel", 15),
                           width=24)
-        name_box2.place(x=180,y=235)
+        name_box2.place(x=180, y=235)
         # username label
         uname2 = Label(window2,
                        text="USERNAME  :",
                        font=("ariel", 15, "bold"))
-        uname2.place(x=43,y=265)
+        uname2.place(x=43, y=265)
         # username textbox
         uname_box2 = Entry(window2,
                            font=("ariel", 15),
                            width=24)
-        uname_box2.place(x=180,y=265)
+        uname_box2.place(x=180, y=265)
         # PASSWORD label
         passwd2 = Label(window2,
                         text="PASSWORD :",
                         font=("ariel", 15, "bold"))
-        passwd2.place(x=43,y=295)
+        passwd2.place(x=43, y=295)
         # PASSWORD textbox
         passwd_box2 = Entry(window2,
                             show=str('*'),
                             font=("ariel", 15),
                             width=24)
-        passwd_box2.place(x=180,y=295)
+        passwd_box2.place(x=180, y=295)
         # Deposit label
         deposit2 = Label(window2,
                          text="DEPOSIT      :",
                          font=("ariel", 15, "bold"))
-        deposit2.place(x=43,y=325)
+        deposit2.place(x=43, y=325)
         # Deposit textbox
         deposit_box2 = Entry(window2,
                              font=("ariel", 15),
                              width=24)
-        deposit_box2.place(x=180,y=325)
+        deposit_box2.place(x=180, y=325)
 
         # submit button
         def CreateAccSubmit():
@@ -98,7 +98,10 @@ def Window1_Function():
             if n2.isalnum() and u2.isalnum() and p2.isalnum() and b2.isdigit():
                 if u2 not in datalst:
                     if int(b2) >= 1000:
-                        q = "INSERT INTO bdetails(NAME, USERNAME,PASSWD,BALANCE)values('{}','{}','{}',{})".format(n2,u2,p2,b2)
+                        q = "INSERT INTO bdetails(NAME, USERNAME,PASSWD,BALANCE)values('{}','{}','{}',{})".format(n2,
+                                                                                                                  u2,
+                                                                                                                  p2,
+                                                                                                                  b2)
                         cursor2 = con.cursor()
                         cursor2.execute(q)
                         con.commit()
@@ -142,30 +145,30 @@ def Window1_Function():
         BackgroundImg.image = BG
         WindowPic = PhotoImage(file="LogInPic.png")
         WindowImg = Label(window3, image=WindowPic)
-        WindowImg.place(x=200, y=120)                     ######WindowImg size = 96x96
+        WindowImg.place(x=200, y=120)  ######WindowImg size = 96x96
         WindowImg.image = WindowPic
 
         # username label
         uname3 = Label(window3,
                        text="USERNAME  :",
                        font=("ariel", 15, "bold"))
-        uname3.place(x=43,y=235)
+        uname3.place(x=43, y=235)
         # username textbox
         uname_box3 = Entry(window3,
                            font=("ariel", 15),
                            width=24)
-        uname_box3.place(x=180,y=235)
+        uname_box3.place(x=180, y=235)
         # Passwd label
         passwd3 = Label(window3,
                         text="PASSWORD :",
                         font=("ariel", 15, "bold"))
-        passwd3.place(x=43,y=265)
+        passwd3.place(x=43, y=265)
         # Passwd textbox
         passwd_box3 = Entry(window3,
                             show=str('*'),
                             font=("ariel", 15),
                             width=24)
-        passwd_box3.place(x=180,y=265)
+        passwd_box3.place(x=180, y=265)
 
         ### submit button
         ##(Window4) Bank Details Window
@@ -189,22 +192,22 @@ def Window1_Function():
             name4 = Label(window4,
                           text="NAME                           :",
                           font=("ariel", 15, "bold"))
-            name4.place(x=44,y=235)
+            name4.place(x=44, y=235)
             # username label
             uname4 = Label(window4,
                            text="USERNAME                  :",
                            font=("ariel", 15, "bold"))
-            uname4.place(x=44,y=265)
+            uname4.place(x=44, y=265)
             # PASSWORD label
             passwd4 = Label(window4,
                             text="PASSWORD                 :",
                             font=("ariel", 15, "bold"))
-            passwd4.place(x=44,y=295)
+            passwd4.place(x=44, y=295)
             # Balance label
             balance4 = Label(window4,
                              text="ACCOUNT BALANCE   :",
                              font=("ariel", 15, "bold"))
-            balance4.place(x=45,y=325)
+            balance4.place(x=45, y=325)
 
             # Labels to Display values from SQL
             cursor = con.cursor()
@@ -219,28 +222,28 @@ def Window1_Function():
                                  textvariable=var1,
                                  font=("ariel", 15, "bold"))
                 var1.set(a)
-                NameVal4.place(x=295,y=235)
+                NameVal4.place(x=295, y=235)
                 # UsernameValue label
                 var2 = StringVar()
                 UsernameVal4 = Label(window4,
                                      textvariable=var2,
                                      font=("ariel", 15, "bold"))
                 var2.set(b)
-                UsernameVal4.place(x=295,y=265)
+                UsernameVal4.place(x=295, y=265)
                 # PasswordValue label
                 var3 = StringVar()
                 PasswdVal4 = Label(window4,
                                    textvariable=var3,
                                    font=("ariel", 15, "bold"))
                 var3.set(c)
-                PasswdVal4.place(x=295,y=295)
+                PasswdVal4.place(x=295, y=295)
                 # BalanceValue label
                 var4 = StringVar()
                 PasswdVal4 = Label(window4,
                                    textvariable=var4,
                                    font=("ariel", 15, "bold"))
                 var4.set(d)
-                PasswdVal4.place(x=295,y=325)
+                PasswdVal4.place(x=295, y=325)
             print(b)
             print(var2)
 
@@ -254,6 +257,11 @@ def Window1_Function():
                 BackgroundImg = Label(window5, image=BG)
                 BackgroundImg.place(x=0, y=0)
                 BackgroundImg.image = BG
+                WindowPic = PhotoImage(file="LoanChoicesPic.png")
+                WindowImg = Label(window5, image=WindowPic)
+                WindowImg.place(x=200, y=120)  ######WindowImg size = 96x96
+                WindowImg.image = WindowPic
+
 
                 ### (Window6)Home Loan Window
                 def Window6_Function():
@@ -290,7 +298,7 @@ def Window1_Function():
                     h_rate_box6.place(x=180, y=265)
                     # h_time label
                     h_time6 = Label(window6,
-                                text=" Time           : ",
+                                    text=" Time           : ",
                                     font=("ariel", 15, "bold"))
                     h_time6.place(x=43, y=295)
                     # h_time display label
@@ -307,7 +315,7 @@ def Window1_Function():
                         global t6
                         t6 = h_time_box6.get()
                         if p6.isdigit() and t6.isdigit():
-                            if p6 == '' or r6 == '' or t6 == '' or int(p6)==0 or int(t6)==0:
+                            if p6 == '' or r6 == '' or t6 == '' or int(p6) == 0 or int(t6) == 0:
                                 Invalid_Label = Label(window6,
                                                       text="Invalid Input!                          ",
                                                       fg="red",
@@ -404,7 +412,7 @@ def Window1_Function():
                         r7 = 6
                         t7 = c_time_box7.get()
                         if p7.isdigit() and t7.isdigit():
-                            if p7 == '' or r7 == '' or t7 == '' or int(p7)==0 or int(t7)==0:
+                            if p7 == '' or r7 == '' or t7 == '' or int(p7) == 0 or int(t7) == 0:
                                 Invalid_Label = Label(window7,
                                                       text="Invalid Input!                       ",
                                                       fg="red",
@@ -500,7 +508,7 @@ def Window1_Function():
                         r8 = 5
                         t8 = p_time_box8.get()
                         if p8.isdigit() and t8.isdigit():
-                            if p8 == '' or r8 == '' or t8 == '' or int(p8)==0 or int(t8)==0:
+                            if p8 == '' or r8 == '' or t8 == '' or int(p8) == 0 or int(t8) == 0:
                                 Invalid_Label = Label(window8,
                                                       text="Invalid Input!                   ",
                                                       fg="red",
@@ -769,7 +777,7 @@ def Window1_Function():
                 # Labels to Display values from SQL
                 cursor = con.cursor()
 
-                #home loan function
+                # home loan function
                 def HomeLoanDetails():
                     window12 = Toplevel()
                     window12.title("Home Loan Details")
@@ -806,7 +814,7 @@ def Window1_Function():
                     for i in data1:
                         p, r, t, sd = i[0], i[1], i[2], i[3]
 
-                    q2 = "select date_add(h_date,interval '{}' year) from bdetails where username = '{}'".format(t,U3)
+                    q2 = "select date_add(h_date,interval '{}' year) from bdetails where username = '{}'".format(t, U3)
                     cursor.execute(q2)
                     data2 = cursor.fetchall()
                     for i in data2:
@@ -861,20 +869,21 @@ def Window1_Function():
 
                     ##pay loan
                     def HLoanPay():
-                        qHPay="select Balance from bdetails where username='{}'".format(U3)
+                        qHPay = "select Balance from bdetails where username='{}'".format(U3)
                         cursor.execute(qHPay)
                         data = cursor.fetchall()
                         for i in data:
                             bal = i[0]
-                        DecBal= float(bal)-float(mtotal)
-                        DecLoan= float(total)-float(mtotal)
+                        DecBal = float(bal) - float(mtotal)
+                        DecLoan = float(total) - float(mtotal)
 
-                        qNewDetails="update bdetails set balance={} where username='{}'".format(DecBal,U3)
+                        qNewDetails = "update bdetails set balance={} where username='{}'".format(DecBal, U3)
                         cursor.execute(qNewDetails)
                         con.commit()
                         window12.destroy()
 
-                    HPay = Button(window12, text='PAY MONTHLY INSTALLMENT', font=("ariel", 15, "bold"), bg='light grey', command=HLoanPay)
+                    HPay = Button(window12, text='PAY MONTHLY INSTALLMENT', font=("ariel", 15, "bold"), bg='light grey',
+                                  command=HLoanPay)
                     HPay.place(x=90, y=450)
 
                 # Home Loan Button
@@ -885,7 +894,8 @@ def Window1_Function():
                                           padx=30,
                                           command=HomeLoanDetails)
                 HomeLoanButton11.place(x=125, y=380)
-                #car loan function
+
+                # car loan function
                 def CarLoanDetails():
                     window13 = Toplevel()
                     window13.title("Car Loan Details")
@@ -984,7 +994,7 @@ def Window1_Function():
                                          command=CarLoanDetails)
                 CarLoanButton11.place(x=125, y=450)
 
-                #personal loan function
+                # personal loan function
                 def PersonalLoanDetails():
                     window14 = Toplevel()
                     window14.title("Personal Loan Details")
@@ -1021,7 +1031,7 @@ def Window1_Function():
                     for i in data1:
                         p, r, t, sd = i[0], i[1], i[2], i[3]
 
-                    q2 = "select date_add(p_date,interval '{}' year) from bdetails where username = '{}'".format(t,U3)
+                    q2 = "select date_add(p_date,interval '{}' year) from bdetails where username = '{}'".format(t, U3)
                     cursor.execute(q2)
                     data2 = cursor.fetchall()
                     for i in data2:
@@ -1083,7 +1093,7 @@ def Window1_Function():
                                               command=PersonalLoanDetails)
                 PersonalLoanButton11.place(x=125, y=525)
 
-                #window11 details from SQL
+                # window11 details from SQL
                 q = "select h_principal,c_principal,p_principal from bdetails where USERNAME = '{}'".format(b)
                 cursor.execute(q)
                 data = cursor.fetchall()
@@ -1166,8 +1176,8 @@ def Window1_Function():
 
     window1.mainloop()
 
-Window1_Function()
 
+Window1_Function()
 
 ####Loan details None error
 ####Change PAY MONTHLY INSTALLMENT to small
