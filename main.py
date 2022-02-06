@@ -2,7 +2,7 @@ from tkinter import *
 
 import mysql.connector as sqltor
 
-con = sqltor.connect(host="localhost", user="root", passwd="123456", database="bank")
+con = sqltor.connect(host="localhost", user="root", passwd="saransql123", database="bank")
 if con.is_connected():
     print("Connection Successful...")
 
@@ -844,21 +844,26 @@ def Window1_Function():
                     mpaymentLabel = Label(window12, text='MONTHLY PAYMENT  :', font=("ariel", 15, "bold"))
                     mpaymentLabel.place(x=45, y=415)
                     # MPVal Label
-                    Output1 = StringVar()
-                    Output2 = StringVar()
-                    p = float(p)
-                    r = float(r)
-                    t = float(t)
-                    total = p * ((1 + (r / 100)) ** t)
-                    mtotal = total / (t * 12)
-                    # output
-                    Output1.set("₹ " + str(round(total, 2)))
-                    label1 = Label(window12, textvariable=Output1, font=("ariel", 15, "bold"))
-                    label1.place(x=285, y=385)
-                    Output2.set("₹ " + str(round(mtotal, 2)))
-                    label2 = Label(window12, textvariable=Output2, font=("ariel", 15, "bold"))
-                    label2.place(x=285, y=415)
-
+                    if p!=None and r!=None and t!=None:                        
+                        Output1 = StringVar()
+                        Output2 = StringVar()
+                        p = float(p)
+                        r = float(r)
+                        t = float(t)
+                        total = p * ((1 + (r / 100)) ** t)
+                        mtotal = total / (t * 12)
+                        qhtotal = "update bdetails set h_total = {} where username = '{}'".format(total,U3)
+                        cursor.execute(qhtotal)
+                        con.commit()
+                        
+                        # output
+                        Output1.set("₹ " + str(round(total, 2)))
+                        label1 = Label(window12, textvariable=Output1, font=("ariel", 15, "bold"))
+                        label1.place(x=285, y=385)
+                        Output2.set("₹ " + str(round(mtotal, 2)))
+                        label2 = Label(window12, textvariable=Output2, font=("ariel", 15, "bold"))
+                        label2.place(x=285, y=415)
+                                            
                     # Close Window Button
                     def closewindow12():
                         window12.destroy()
@@ -869,20 +874,22 @@ def Window1_Function():
 
                     ##pay loan
                     def HLoanPay():
-                        qHPay = "select Balance from bdetails where username='{}'".format(U3)
+                        qHPay = "select Balance,h_total,h_time from bdetails where username='{}'".format(U3)
                         cursor.execute(qHPay)
                         data = cursor.fetchall()
                         for i in data:
-                            bal = i[0]
+                            bal,ht,hti = i[0],i[1],i[2]
+                        mtotal=float(ht)/(int(hti)*12)
+                        print(bal,mtotal)    
                         DecBal = float(bal) - float(mtotal)
-                        DecLoan = float(total) - float(mtotal)
-
-                        qNewDetails = "update bdetails set balance={} where username='{}'".format(DecBal, U3)
+                        DecLoan = float(ht) - float(mtotal)
+                        print(bal,ht,hti,mtotal,DecBal,DecLoan)
+                        qNewDetails = "update bdetails set balance={} and h_total = {} where username='{}'".format(DecBal,DecLoan, U3)
                         cursor.execute(qNewDetails)
                         con.commit()
                         window12.destroy()
 
-                    HPay = Button(window12, text='PAY MONTHLY INSTALLMENT', font=("ariel", 15, "bold"), bg='light grey',
+                    HPay = Button(window12, text='Pay Monthly Installment', font=("ariel", 15, "bold"), bg='light grey',
                                   command=HLoanPay)
                     HPay.place(x=90, y=450)
 
