@@ -642,7 +642,7 @@ def Window1_Function():
                             cursor9.execute(q)
                             con.commit()
                             window9.destroy()
-                        elif d9.isdigit() and int(d9) > 100000:
+                        elif int(d9) > 100000:
                             Limit_Label = Label(window9,
                                                 text="Max deposit ₹100000!",
                                                 fg="red",
@@ -850,25 +850,35 @@ def Window1_Function():
                         p = float(p)
                         r = float(r)
                         t = float(t)
+                        total = p * ((1 + (r / 100)) ** t)
+                        mtotal = total / (t * 12)
+                        qhtotal = "update bdetails set h_total = {} where username = '{}'".format(total,U3)
                         qhtc = "select h_totcalc from bdetails where username = '{}'".format(U3)
                         cursor.execute(qhtc)                        
                         datahtc = cursor.fetchall()
                         for i in datahtc:
                             hhtc = i[0]
-                        total = int(p * ((1 + (r / 100)) ** t))
-                        mtotal = int(total / (t * 12))
-                        qhtotal = "update bdetails set h_total = {} where username = '{}'".format(total,U3)
-                        #qhtotcalc = "update bdetails set h_totcalc = {} where username = '{}'".format(total,U3)
-                        cursor.execute(qhtotal)
-                        #cursor.execute(qhtotcalc)
-                        con.commit()                        
-                        # output
-                        Output1.set("₹ " + str(round(hhtc, 2)))
-                        label1 = Label(window12, textvariable=Output1, font=("ariel", 15, "bold"))
-                        label1.place(x=285, y=385)
-                        Output2.set("₹ " + str(round(mtotal, 2)))
-                        label2 = Label(window12, textvariable=Output2, font=("ariel", 15, "bold"))
-                        label2.place(x=285, y=415)
+                        vcheck = hhtc
+                        if vcheck==None: #or int(vcheck)<0
+                            qhtotcalc = "update bdetails set h_totcalc = {} where username = '{}'".format(total,U3)
+                            cursor.execute(qhtotcalc)
+                            con.commit()                            
+                            # output
+                            Output1.set("₹ " + str(round(total, 2)))
+                            label1 = Label(window12, textvariable=Output1, font=("ariel", 15, "bold"))
+                            label1.place(x=285, y=385)
+                            Output2.set("₹ " + str(round(mtotal, 2)))
+                            label2 = Label(window12, textvariable=Output2, font=("ariel", 15, "bold"))
+                            label2.place(x=285, y=415)
+                                                    
+                        else:                                              
+                            # output
+                            Output1.set("₹ " + str(round(hhtc, 2)))
+                            label1 = Label(window12, textvariable=Output1, font=("ariel", 15, "bold"))
+                            label1.place(x=285, y=385)
+                            Output2.set("₹ " + str(round(mtotal, 2)))
+                            label2 = Label(window12, textvariable=Output2, font=("ariel", 15, "bold"))
+                            label2.place(x=285, y=415)
                                             
                     # Close Window Button
                     def closewindow12():
