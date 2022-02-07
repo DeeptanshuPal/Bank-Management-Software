@@ -642,7 +642,7 @@ def Window1_Function():
                             cursor9.execute(q)
                             con.commit()
                             window9.destroy()
-                        elif int(d9) > 100000:
+                        elif d9.isdigit() and int(d9) > 100000:
                             Limit_Label = Label(window9,
                                                 text="Max deposit ₹100000!",
                                                 fg="red",
@@ -839,7 +839,7 @@ def Window1_Function():
 
                     ##Output
                     # MonthlyPay Label
-                    tpaymentLabel = Label(window12, text='TOTAL AMOUNT         :', font=("ariel", 15, "bold"))
+                    tpaymentLabel = Label(window12, text='AMOUNT TO BE PAID        :', font=("ariel", 15, "bold"))
                     tpaymentLabel.place(x=45, y=385)
                     mpaymentLabel = Label(window12, text='MONTHLY PAYMENT  :', font=("ariel", 15, "bold"))
                     mpaymentLabel.place(x=45, y=415)
@@ -850,14 +850,20 @@ def Window1_Function():
                         p = float(p)
                         r = float(r)
                         t = float(t)
-                        total = p * ((1 + (r / 100)) ** t)
-                        mtotal = total / (t * 12)
+                        qhtc = "select h_totcalc from bdetails where username = '{}'".format(U3)
+                        cursor.execute(qhtc)                        
+                        datahtc = cursor.fetchall()
+                        for i in datahtc:
+                            hhtc = i[0]
+                        total = int(p * ((1 + (r / 100)) ** t))
+                        mtotal = int(total / (t * 12))
                         qhtotal = "update bdetails set h_total = {} where username = '{}'".format(total,U3)
+                        #qhtotcalc = "update bdetails set h_totcalc = {} where username = '{}'".format(total,U3)
                         cursor.execute(qhtotal)
-                        con.commit()
-                        
+                        #cursor.execute(qhtotcalc)
+                        con.commit()                        
                         # output
-                        Output1.set("₹ " + str(round(total, 2)))
+                        Output1.set("₹ " + str(round(hhtc, 2)))
                         label1 = Label(window12, textvariable=Output1, font=("ariel", 15, "bold"))
                         label1.place(x=285, y=385)
                         Output2.set("₹ " + str(round(mtotal, 2)))
@@ -874,18 +880,22 @@ def Window1_Function():
 
                     ##pay loan
                     def HLoanPay():
-                        qHPay = "select Balance,h_total,h_time from bdetails where username='{}'".format(U3)
+                        qHPay = "select Balance,h_total,h_totcalc,h_time from bdetails where username='{}'".format(U3)
                         cursor.execute(qHPay)
                         data = cursor.fetchall()
                         for i in data:
-                            bal,ht,hti = i[0],i[1],i[2]
-                        mtotal=float(ht)/(int(hti)*12)
+                            bal,ht,htc,hti = i[0],i[1],i[2],i[3]
+                        mtotal=int(float(ht)/(int(hti)*12))
                         print(bal,mtotal)    
                         DecBal = float(bal) - float(mtotal)
-                        DecLoan = float(ht) - float(mtotal)
-                        print(bal,ht,hti,mtotal,DecBal,DecLoan)
-                        qNewDetails = "update bdetails set balance={} and h_total = {} where username='{}'".format(DecBal,DecLoan, U3)
-                        cursor.execute(qNewDetails)
+                        DecBal=int(DecBal)
+                        DecLoan = float(htc) - float(mtotal)
+                        DecLoan = int(DecLoan)
+                        print(bal,ht,htc,hti,mtotal,DecBal,DecLoan)
+                        qNewDetails1 = "update bdetails set balance={} where username='{}'".format(DecBal,U3)
+                        qNewDetails2="update bdetails set h_totcalc = {} where username='{}'".format(DecLoan,U3)
+                        cursor.execute(qNewDetails1)
+                        cursor.execute(qNewDetails2)
                         con.commit()
                         window12.destroy()
 
