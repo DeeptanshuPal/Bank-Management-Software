@@ -2,7 +2,7 @@ from tkinter import *
 
 import mysql.connector as sqltor
 
-con = sqltor.connect(host="localhost", user="root", passwd="R3d23@lnut", database="bank")
+con = sqltor.connect(host="localhost", user="root", passwd="123456", database="bank")
 if con.is_connected():
     print("Connection Successful...")
 
@@ -26,6 +26,17 @@ def Window1_Function():
     bank_motto = Label(window1, text="We Understand Your World.", font=("Bahnschrift SemiLight", 15, 'italic', 'bold'),
                        fg="gray")
     bank_motto.place(x=133, y=210)
+    #Display Current Time
+    QTime = "Select hour(curtime()),minute(curtime())"
+    cursorT = con.cursor()
+    cursorT.execute(QTime)
+    dataT = cursorT.fetchall()
+    for i in dataT:
+        hCurTime = i[0]
+        mCurTime = i[1]
+    TimeVal1=str(hCurTime)+":"+str(mCurTime)
+    timeLabel = Label(window1, text=TimeVal1, font=('arial black', 14,'bold'), bg='#a6a8a5',pady=0) # font size =15 for my big screen
+    timeLabel.place(x=48,y=72)    #y=85 for my big screen
 
     # Window1 Button Functions
     ## (Window2)Create Account window
@@ -41,6 +52,18 @@ def Window1_Function():
         WindowImg = Label(window2, image=WindowPic)
         WindowImg.place(x=200, y=120)  ######WindowImg size = 96x96
         WindowImg.image = WindowPic
+        # Display Current Time
+        QTime = "Select hour(curtime()),minute(curtime())"
+        cursorT = con.cursor()
+        cursorT.execute(QTime)
+        dataT = cursorT.fetchall()
+        for i in dataT:
+            hCurTime = i[0]
+            mCurTime = i[1]
+        TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+        timeLabel = Label(window2, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
+                          pady=0)  # font size =15 for my big screen
+        timeLabel.place(x=48, y=72)  # y=85 for my big screen
 
         # Name label
         name2 = Label(window2,
@@ -151,6 +174,18 @@ def Window1_Function():
         WindowImg = Label(window3, image=WindowPic)
         WindowImg.place(x=200, y=120)  ######WindowImg size = 96x96
         WindowImg.image = WindowPic
+        # Display Current Time
+        QTime = "Select hour(curtime()),minute(curtime())"
+        cursorT = con.cursor()
+        cursorT.execute(QTime)
+        dataT = cursorT.fetchall()
+        for i in dataT:
+            hCurTime = i[0]
+            mCurTime = i[1]
+        TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+        timeLabel = Label(window3, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
+                          pady=0)  # font size =15 for my big screen
+        timeLabel.place(x=48, y=72)  # y=85 for my big screen
 
         # username label
         uname3 = Label(window3,
@@ -190,6 +225,18 @@ def Window1_Function():
             WindowImg = Label(window4, image=WindowPic)
             WindowImg.place(x=200, y=120)  ######WindowImg size = 96x96
             WindowImg.image = WindowPic
+            # Display Current Time
+            QTime = "Select hour(curtime()),minute(curtime())"
+            cursorT = con.cursor()
+            cursorT.execute(QTime)
+            dataT = cursorT.fetchall()
+            for i in dataT:
+                hCurTime = i[0]
+                mCurTime = i[1]
+            TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+            timeLabel = Label(window4, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
+                              pady=0)  # font size =15 for my big screen
+            timeLabel.place(x=48, y=72)  # y=85 for my big screen
 
             # Window4 widgets
             # Name label
@@ -265,6 +312,18 @@ def Window1_Function():
                 WindowImg = Label(window5, image=WindowPic)
                 WindowImg.place(x=200, y=120)  ######WindowImg size = 96x96
                 WindowImg.image = WindowPic
+                # Display Current Time
+                QTime = "Select hour(curtime()),minute(curtime())"
+                cursorT = con.cursor()
+                cursorT.execute(QTime)
+                dataT = cursorT.fetchall()
+                for i in dataT:
+                    hCurTime = i[0]
+                    mCurTime = i[1]
+                TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+                timeLabel = Label(window5, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
+                                  pady=0)  # font size =15 for my big screen
+                timeLabel.place(x=48, y=72)  # y=85 for my big screen
 
 
                 ### (Window6)Home Loan Window
@@ -279,6 +338,18 @@ def Window1_Function():
                     WindowImg = Label(window6, image=WindowPic)
                     WindowImg.place(x=200, y=120)  ######WindowImg size = 96x96
                     WindowImg.image = WindowPic
+                    # Display Current Time
+                    QTime = "Select hour(curtime()),minute(curtime())"
+                    cursorT = con.cursor()
+                    cursorT.execute(QTime)
+                    dataT = cursorT.fetchall()
+                    for i in dataT:
+                        hCurTime = i[0]
+                        mCurTime = i[1]
+                    TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+                    timeLabel = Label(window6, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
+                                      pady=0)  # font size =15 for my big screen
+                    timeLabel.place(x=48, y=72)  # y=85 for my big screen
 
                     # h_principal label
                     h_principal6 = Label(window6,
@@ -387,6 +458,18 @@ def Window1_Function():
                     WindowImg = Label(window7, image=WindowPic)
                     WindowImg.place(x=182, y=115)  ######WindowImg size = 96x96
                     WindowImg.image = WindowPic
+                    # Display Current Time
+                    QTime = "Select hour(curtime()),minute(curtime())"
+                    cursorT = con.cursor()
+                    cursorT.execute(QTime)
+                    dataT = cursorT.fetchall()
+                    for i in dataT:
+                        hCurTime = i[0]
+                        mCurTime = i[1]
+                    TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+                    timeLabel = Label(window7, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
+                                      pady=0)  # font size =15 for my big screen
+                    timeLabel.place(x=48, y=72)  # y=85 for my big screen
 
                     # c_principal label
                     c_principal7 = Label(window7,
@@ -432,7 +515,7 @@ def Window1_Function():
                                                       fg="red",
                                                       font=("ariel", 15, "bold"))
                                 Invalid_Label.place(x=45, y=450)
-                                Blank = Label(window6,
+                                Blank = Label(window7,
                                                   text="                                                                               ",
                                                   fg="black",
                                                   font=("ariel", 10, "bold"))
@@ -443,7 +526,7 @@ def Window1_Function():
                                                       fg="red",
                                                       font=("ariel", 15, "bold"))
                                 MaxTime_Label.place(x=45, y=450)
-                                Blank = Label(window6,
+                                Blank = Label(window7,
                                                   text="                                                                                   ",
                                                   fg="black",
                                                   font=("ariel", 10, "bold"))
@@ -493,6 +576,18 @@ def Window1_Function():
                     WindowImg = Label(window8, image=WindowPic)
                     WindowImg.place(x=200, y=120)  ######WindowImg size = 96x96
                     WindowImg.image = WindowPic
+                    # Display Current Time
+                    QTime = "Select hour(curtime()),minute(curtime())"
+                    cursorT = con.cursor()
+                    cursorT.execute(QTime)
+                    dataT = cursorT.fetchall()
+                    for i in dataT:
+                        hCurTime = i[0]
+                        mCurTime = i[1]
+                    TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+                    timeLabel = Label(window8, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
+                                      pady=0)  # font size =15 for my big screen
+                    timeLabel.place(x=48, y=72)  # y=85 for my big screen
 
                     # p_principal label
                     p_principal8 = Label(window8,
@@ -538,7 +633,7 @@ def Window1_Function():
                                                       fg="red",
                                                       font=("ariel", 15, "bold"))
                                 Invalid_Label.place(x=45, y=450)
-                                Blank = Label(window6,
+                                Blank = Label(window8,
                                                   text="                                                                        ",
                                                   fg="black",
                                                   font=("ariel", 10, "bold"))
@@ -549,7 +644,7 @@ def Window1_Function():
                                                       fg="red",
                                                       font=("ariel", 15, "bold"))
                                 MaxTime_Label.place(x=45, y=450)
-                                Blank = Label(window6,
+                                Blank = Label(window8,
                                                   text="                                                                        ",
                                                   fg="black",
                                                   font=("ariel", 10, "bold"))
@@ -647,6 +742,18 @@ def Window1_Function():
                 WindowImg = Label(window9, image=WindowPic)
                 WindowImg.place(x=200, y=120)  ######WindowImg size = 96x96
                 WindowImg.image = WindowPic
+                # Display Current Time
+                QTime = "Select hour(curtime()),minute(curtime())"
+                cursorT = con.cursor()
+                cursorT.execute(QTime)
+                dataT = cursorT.fetchall()
+                for i in dataT:
+                    hCurTime = i[0]
+                    mCurTime = i[1]
+                TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+                timeLabel = Label(window9, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
+                                  pady=0)  # font size =15 for my big screen
+                timeLabel.place(x=48, y=72)  # y=85 for my big screen
 
                 # Deposit Amount label
                 Deposit_Amt = Label(window9,
@@ -719,6 +826,18 @@ def Window1_Function():
                 WindowImg = Label(window10, image=WindowPic)
                 WindowImg.place(x=200, y=120)  ######WindowImg size = 96x96
                 WindowImg.image = WindowPic
+                # Display Current Time
+                QTime = "Select hour(curtime()),minute(curtime())"
+                cursorT = con.cursor()
+                cursorT.execute(QTime)
+                dataT = cursorT.fetchall()
+                for i in dataT:
+                    hCurTime = i[0]
+                    mCurTime = i[1]
+                TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+                timeLabel = Label(window10, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
+                                  pady=0)  # font size =15 for my big screen
+                timeLabel.place(x=48, y=72)  # y=85 for my big screen
 
                 # Withdraw Amount label
                 Withdraw_Amt = Label(window10,
@@ -791,6 +910,18 @@ def Window1_Function():
                 WindowImg = Label(window11, image=WindowPic)
                 WindowImg.place(x=200, y=120)  ######WindowImg size = 96x96
                 WindowImg.image = WindowPic
+                # Display Current Time
+                QTime = "Select hour(curtime()),minute(curtime())"
+                cursorT = con.cursor()
+                cursorT.execute(QTime)
+                dataT = cursorT.fetchall()
+                for i in dataT:
+                    hCurTime = i[0]
+                    mCurTime = i[1]
+                TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+                timeLabel = Label(window11, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
+                                  pady=0)  # font size =15 for my big screen
+                timeLabel.place(x=48, y=72)  # y=85 for my big screen
 
                 # h_principal label
                 H_LoanTakenLabel11 = Label(window11,
@@ -824,6 +955,18 @@ def Window1_Function():
                     WindowImg = Label(window12, image=WindowPic)
                     WindowImg.place(x=200, y=120)  ######WindowImg size = 96x96
                     WindowImg.image = WindowPic
+                    # Display Current Time
+                    QTime = "Select hour(curtime()),minute(curtime())"
+                    cursorT = con.cursor()
+                    cursorT.execute(QTime)
+                    dataT = cursorT.fetchall()
+                    for i in dataT:
+                        hCurTime = i[0]
+                        mCurTime = i[1]
+                    TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+                    timeLabel = Label(window12, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
+                                      pady=0)  # font size =15 for my big screen
+                    timeLabel.place(x=48, y=72)  # y=85 for my big screen
 
                     # Labels
                     PLabel12 = Label(window12, text='LOAN TAKEN               :   ₹', font=("ariel", 15, "bold"))
@@ -969,6 +1112,18 @@ def Window1_Function():
                     WindowImg = Label(window13, image=WindowPic)
                     WindowImg.place(x=182, y=115)  ######WindowImg size = 96x96
                     WindowImg.image = WindowPic
+                    # Display Current Time
+                    QTime = "Select hour(curtime()),minute(curtime())"
+                    cursorT = con.cursor()
+                    cursorT.execute(QTime)
+                    dataT = cursorT.fetchall()
+                    for i in dataT:
+                        hCurTime = i[0]
+                        mCurTime = i[1]
+                    TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+                    timeLabel = Label(window13, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
+                                      pady=0)  # font size =15 for my big screen
+                    timeLabel.place(x=48, y=72)  # y=85 for my big screen
 
                     # Labels
                     PLabel13 = Label(window13, text='LOAN TAKEN               :   ₹', font=("ariel", 15, "bold"))
@@ -1069,6 +1224,18 @@ def Window1_Function():
                     WindowImg = Label(window14, image=WindowPic)
                     WindowImg.place(x=200, y=120)  ######WindowImg size = 96x96
                     WindowImg.image = WindowPic
+                    # Display Current Time
+                    QTime = "Select hour(curtime()),minute(curtime())"
+                    cursorT = con.cursor()
+                    cursorT.execute(QTime)
+                    dataT = cursorT.fetchall()
+                    for i in dataT:
+                        hCurTime = i[0]
+                        mCurTime = i[1]
+                    TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+                    timeLabel = Label(window14, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
+                                      pady=0)  # font size =15 for my big screen
+                    timeLabel.place(x=48, y=72)  # y=85 for my big screen
 
                     # Labels
                     PLabel14 = Label(window14, text='LOAN TAKEN               :   ₹', font=("ariel", 15, "bold"))
