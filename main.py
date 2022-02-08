@@ -4,6 +4,7 @@
 ##Change the above as required.
 ##Also, for 15 inch screen, change font size to 15 and y coordinate to 85 everywhere CurTime is used (timeLabel).
 ##Also, for 13 inch screen, change font size to 14 and y coordinate to 72 everywhere CurTime is used (timeLabel).
+##Also, for 15 inch screen, add 40 to the y coordinate for 'Loan Details', 'Take Loans', 'Deposit Money', 'Withdraw Money', 'Log Out' buttons.
 
 from tkinter import *
 
