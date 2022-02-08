@@ -15,7 +15,7 @@ def Window1_Function():
     # window1 icon and image
     icon = PhotoImage(file="Window_Thumbnail.png")
     logo = PhotoImage(file="Bank-Logo.png")
-    BG = PhotoImage(file="MS_Background5.png")
+    BG = PhotoImage(file="MS_Background6.png")
     BackgroundImg = Label(window1, image=BG)
     BackgroundImg.place(x=0, y=0)
     window1.iconphoto(True, icon)
@@ -44,45 +44,45 @@ def Window1_Function():
 
         # Name label
         name2 = Label(window2,
-                      text="NAME           :",
+                      text="NAME                  :",
                       font=("ariel", 15, "bold"))
         name2.place(x=43, y=235)
         # Name textbox
         name_box2 = Entry(window2,
                           font=("ariel", 15),
-                          width=24)
-        name_box2.place(x=180, y=235)
+                          width=20)
+        name_box2.place(x=230, y=235)
         # username label
         uname2 = Label(window2,
-                       text="USERNAME  :",
+                       text="USERNAME         :",
                        font=("ariel", 15, "bold"))
         uname2.place(x=43, y=265)
         # username textbox
         uname_box2 = Entry(window2,
                            font=("ariel", 15),
-                           width=24)
-        uname_box2.place(x=180, y=265)
+                           width=20)
+        uname_box2.place(x=230, y=265)
         # PASSWORD label
         passwd2 = Label(window2,
-                        text="PASSWORD :",
+                        text="PASSWORD        :",
                         font=("ariel", 15, "bold"))
-        passwd2.place(x=43, y=295)
+        passwd2.place(x=44, y=295)
         # PASSWORD textbox
         passwd_box2 = Entry(window2,
                             show=str('*'),
                             font=("ariel", 15),
-                            width=24)
-        passwd_box2.place(x=180, y=295)
+                            width=20)
+        passwd_box2.place(x=230, y=295)
         # Deposit label
         deposit2 = Label(window2,
-                         text="DEPOSIT      :",
+                         text="INITIAL DEPOSIT :",
                          font=("ariel", 15, "bold"))
         deposit2.place(x=43, y=325)
         # Deposit textbox
         deposit_box2 = Entry(window2,
                              font=("ariel", 15),
-                             width=24)
-        deposit_box2.place(x=180, y=325)
+                             width=20)
+        deposit_box2.place(x=230, y=325)
 
         # submit button
         def CreateAccSubmit():
@@ -96,22 +96,26 @@ def Window1_Function():
             data = cursor.fetchall()
             datalst = [item for t in data for item in t]
             if n2.isalnum() and u2.isalnum() and p2.isalnum() and b2.isdigit():
-                if u2 not in datalst:
-                    if int(b2) >= 1000:
-                        q = "INSERT INTO bdetails(NAME, USERNAME,PASSWD,BALANCE)values('{}','{}','{}',{})".format(n2,
-                                                                                                                  u2,
-                                                                                                                  p2,
-                                                                                                                  b2)
+                if u2 not in datalst:                    
+                    if int(b2)<1000:
+                        Invalid_Label = Label(window2,
+                                              text="Minimum deposit ₹1000!         ",
+                                              fg="red",
+                                              font=("ariel", 15, "bold"))
+                        Invalid_Label.place(x=45, y=450)                        
+                    elif int(b2)>1000000:
+                        Invalid_Label = Label(window2,
+                                              text="Maximum deposit ₹1000000!",
+                                              fg="red",
+                                              font=("ariel", 15, "bold"))
+                        Invalid_Label.place(x=45, y=450)
+                    else:
+                        q = "INSERT INTO bdetails(NAME, USERNAME,PASSWD,BALANCE)values('{}','{}','{}',{})".format(n2,u2,p2,b2)                                                                                                                  
                         cursor2 = con.cursor()
                         cursor2.execute(q)
                         con.commit()
-                        window2.destroy()
-                    else:
-                        Invalid_Label = Label(window2,
-                                              text="Minimum deposit ₹1000!",
-                                              fg="red",
-                                              font=("ariel", 15, "bold"))
-                        Invalid_Label.place(x=45, y=350)
+                        window2.destroy()                    
+                                            
                 else:
                     Invalid_Label = Label(window2,
                                           text="Username already exists!",
@@ -230,12 +234,12 @@ def Window1_Function():
                                      font=("ariel", 15, "bold"))
                 var2.set(b)
                 UsernameVal4.place(x=295, y=265)
-                # PasswordValue label
-                var3 = StringVar()
+                # PasswordValue label                
+                k=len(c)
+                kl = k*'*'
                 PasswdVal4 = Label(window4,
-                                   textvariable=var3,
-                                   font=("ariel", 15, "bold"))
-                var3.set(c)
+                                   text=kl,
+                                   font=("ariel", 15, "bold"))                                
                 PasswdVal4.place(x=295, y=295)
                 # BalanceValue label
                 var4 = StringVar()
@@ -587,7 +591,7 @@ def Window1_Function():
                                     bg="light grey",
                                     padx=35,
                                     command=Window5_Function)
-            TakeLoanButton.place(x=150, y=450)
+            TakeLoanButton.place(x=150, y=410)
 
             # Log out & Go Back to Home Screen Button
             def LogOutFunc():
@@ -599,7 +603,7 @@ def Window1_Function():
                                   bg="light grey",
                                   padx=50,
                                   command=LogOutFunc)
-            LogOutButton.place(x=150, y=600)
+            LogOutButton.place(x=150, y=560)
 
             ### (Window9)Deposit Balance Window
             def Window9_Function():
@@ -670,7 +674,7 @@ def Window1_Function():
                                       bg="light grey",
                                       padx=20,
                                       command=Window9_Function)
-            DepositAmtButton.place(x=150, y=500)
+            DepositAmtButton.place(x=150, y=460)
 
             ### (Window10)Withdraw Balance Window
             def Window10_Function():
@@ -742,7 +746,7 @@ def Window1_Function():
                                        bg="light grey",
                                        padx=10,
                                        command=Window10_Function)
-            WithdrawAmtButton.place(x=150, y=550)
+            WithdrawAmtButton.place(x=150, y=510)
 
             ##(Window11)Loan Details Window
             def Window11_Function():
@@ -839,7 +843,7 @@ def Window1_Function():
 
                     ##Output
                     # MonthlyPay Label
-                    tpaymentLabel = Label(window12, text='AMOUNT TO BE PAID        :', font=("ariel", 15, "bold"))
+                    tpaymentLabel = Label(window12, text='TOTAL AMOUNT       :', font=("ariel", 15, "bold"))#THIS WAS AMOUNT TO BE PAID
                     tpaymentLabel.place(x=45, y=385)
                     mpaymentLabel = Label(window12, text='MONTHLY PAYMENT  :', font=("ariel", 15, "bold"))
                     mpaymentLabel.place(x=45, y=415)
@@ -853,7 +857,7 @@ def Window1_Function():
                         total = p * ((1 + (r / 100)) ** t)
                         mtotal = total / (t * 12)
                         qhtotal = "update bdetails set h_total = {} where username = '{}'".format(total,U3)
-                        qhtc = "select h_totcalc from bdetails where username = '{}'".format(U3)
+                        '''qhtc = "select h_totcalc from bdetails where username = '{}'".format(U3)
                         cursor.execute(qhtc)                        
                         datahtc = cursor.fetchall()
                         for i in datahtc:
@@ -862,23 +866,23 @@ def Window1_Function():
                         if vcheck==None: #or int(vcheck)<0
                             qhtotcalc = "update bdetails set h_totcalc = {} where username = '{}'".format(total,U3)
                             cursor.execute(qhtotcalc)
-                            con.commit()                            
+                            con.commit()'''                            
                             # output
-                            Output1.set("₹ " + str(round(total, 2)))
-                            label1 = Label(window12, textvariable=Output1, font=("ariel", 15, "bold"))
-                            label1.place(x=285, y=385)
-                            Output2.set("₹ " + str(round(mtotal, 2)))
-                            label2 = Label(window12, textvariable=Output2, font=("ariel", 15, "bold"))
-                            label2.place(x=285, y=415)
+                        Output1.set("₹ " + str(round(total, 2)))
+                        label1 = Label(window12, textvariable=Output1, font=("ariel", 15, "bold"))
+                        label1.place(x=285, y=385)
+                        Output2.set("₹ " + str(round(mtotal, 2)))
+                        label2 = Label(window12, textvariable=Output2, font=("ariel", 15, "bold"))
+                        label2.place(x=285, y=415)
                                                     
-                        else:                                              
+                        '''else:                                              
                             # output
                             Output1.set("₹ " + str(round(hhtc, 2)))
                             label1 = Label(window12, textvariable=Output1, font=("ariel", 15, "bold"))
                             label1.place(x=285, y=385)
                             Output2.set("₹ " + str(round(mtotal, 2)))
                             label2 = Label(window12, textvariable=Output2, font=("ariel", 15, "bold"))
-                            label2.place(x=285, y=415)
+                            label2.place(x=285, y=415)'''
                                             
                     # Close Window Button
                     def closewindow12():
@@ -888,7 +892,7 @@ def Window1_Function():
                                          command=closewindow12)
                     closeButton.place(x=89, y=510)
 
-                    ##pay loan
+                    '''##pay loan
                     def HLoanPay():
                         qHPay = "select Balance,h_total,h_totcalc,h_time from bdetails where username='{}'".format(U3)
                         cursor.execute(qHPay)
@@ -911,7 +915,7 @@ def Window1_Function():
 
                     HPay = Button(window12, text='Pay Monthly Installment', font=("ariel", 15, "bold"), bg='light grey',
                                   command=HLoanPay)
-                    HPay.place(x=90, y=450)
+                    HPay.place(x=90, y=450)'''
 
                 # Home Loan Button
                 HomeLoanButton11 = Button(window11,
@@ -989,20 +993,21 @@ def Window1_Function():
                     mpaymentLabel = Label(window13, text='MONTHLY PAYMENT  :', font=("ariel", 15, "bold"))
                     mpaymentLabel.place(x=45, y=415)
                     # MPVal Label
-                    Output1 = StringVar()
-                    Output2 = StringVar()
-                    p = float(p)
-                    r = float(r)
-                    t = float(t)
-                    total = p * ((1 + (r / 100)) ** t)
-                    mtotal = total / (t * 13)
-                    # output
-                    Output1.set("₹ " + str(round(total, 2)))
-                    label1 = Label(window13, textvariable=Output1, font=("ariel", 15, "bold"))
-                    label1.place(x=285, y=385)
-                    Output2.set("₹ " + str(round(mtotal, 2)))
-                    label2 = Label(window13, textvariable=Output2, font=("ariel", 15, "bold"))
-                    label2.place(x=285, y=415)
+                    if p!=None and r!=None and t!=None:                        
+                        Output1 = StringVar()
+                        Output2 = StringVar()
+                        p = float(p)
+                        r = float(r)
+                        t = float(t)
+                        total = p * ((1 + (r / 100)) ** t)
+                        mtotal = total / (t * 13)
+                        # output
+                        Output1.set("₹ " + str(round(total, 2)))
+                        label1 = Label(window13, textvariable=Output1, font=("ariel", 15, "bold"))
+                        label1.place(x=285, y=385)
+                        Output2.set("₹ " + str(round(mtotal, 2)))
+                        label2 = Label(window13, textvariable=Output2, font=("ariel", 15, "bold"))
+                        label2.place(x=285, y=415)
 
                     # Close Window Button
                     def closewindow13():
@@ -1088,20 +1093,21 @@ def Window1_Function():
                     mpaymentLabel = Label(window14, text='MONTHLY PAYMENT  :', font=("ariel", 15, "bold"))
                     mpaymentLabel.place(x=45, y=415)
                     # MPVal Label
-                    Output1 = StringVar()
-                    Output2 = StringVar()
-                    p = float(p)
-                    r = float(r)
-                    t = float(t)
-                    total = p * ((1 + (r / 100)) ** t)
-                    mtotal = total / (t * 12)
-                    # output
-                    Output1.set("₹ " + str(round(total, 2)))
-                    label1 = Label(window14, textvariable=Output1, font=("ariel", 15, "bold"))
-                    label1.place(x=285, y=385)
-                    Output2.set("₹ " + str(round(mtotal, 2)))
-                    label2 = Label(window14, textvariable=Output2, font=("ariel", 15, "bold"))
-                    label2.place(x=285, y=415)
+                    if p!=None and r!=None and t!=None:                        
+                        Output1 = StringVar()
+                        Output2 = StringVar()
+                        p = float(p)
+                        r = float(r)
+                        t = float(t)
+                        total = p * ((1 + (r / 100)) ** t)
+                        mtotal = total / (t * 12)
+                        # output
+                        Output1.set("₹ " + str(round(total, 2)))
+                        label1 = Label(window14, textvariable=Output1, font=("ariel", 15, "bold"))
+                        label1.place(x=285, y=385)
+                        Output2.set("₹ " + str(round(mtotal, 2)))
+                        label2 = Label(window14, textvariable=Output2, font=("ariel", 15, "bold"))
+                        label2.place(x=285, y=415)
 
                     # Close Window Button
                     def closewindow14():
@@ -1157,7 +1163,7 @@ def Window1_Function():
                                        bg="light grey",
                                        padx=28,
                                        command=Window11_Function)
-            LoanDetailsButton.place(x=150, y=395)
+            LoanDetailsButton.place(x=150, y=355)
 
         ## Checking function
         def LogInCheck():
@@ -1192,7 +1198,7 @@ def Window1_Function():
                              font=("ariel", 15, "bold"),
                              bg="light gray",
                              command=Window2_Function)
-    CreateAccButton.place(x=170, y=300)
+    CreateAccButton.place(x=170, y=280)
     LogInButton = Button(window1,
                          text="Log In",
                          font=("ariel", 15, "bold"),
