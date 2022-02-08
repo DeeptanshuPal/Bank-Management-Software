@@ -18,8 +18,5 @@ CREATE TABLE `bdetails` (
   `h_total` int DEFAULT NULL,
   `c_total` int DEFAULT NULL,
   `p_total` int DEFAULT NULL,
-  `h_totcalc` int DEFAULT NULL,
-  `c_totcalc` int DEFAULT NULL,
-  `p_totcalc` int DEFAULT NULL,
   PRIMARY KEY (`USERNAME`)
 )
