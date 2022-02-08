@@ -40,8 +40,8 @@ def Window1_Function():
         hCurTime = i[0]
         mCurTime = i[1]
     TimeVal1=str(hCurTime)+":"+str(mCurTime)
-    timeLabel = Label(window1, text=TimeVal1, font=('arial black', 14,'bold'), bg='#a6a8a5',pady=0) # font size =15 for 15 inch screen
-    timeLabel.place(x=48,y=72)    #y=85 for 15 inch screen
+    timeLabel = Label(window1, text=TimeVal1, font=('arial black', 14,'bold'), bg='#a6a8a5',pady=0) ##make font size = 15 for 15 inch screen
+    timeLabel.place(x=48,y=72)    ##make y=85 for 15 inch screen
 
     # Window1 Button Functions
     ## (Window2)Create Account window
