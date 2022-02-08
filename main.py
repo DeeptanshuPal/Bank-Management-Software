@@ -1,10 +1,10 @@
 ##This version is for 13 inch screens.
 ##Background image for 13 inch screens is "MS_Background6.png"
 ##Background image for 15 inch screens is "MS_Background5.png"
-##Change the above as required.
 ##Also, for 15 inch screen, change font size to 15 and y coordinate to 85 everywhere CurTime is used (timeLabel).
 ##Also, for 13 inch screen, change font size to 14 and y coordinate to 72 everywhere CurTime is used (timeLabel).
 ##Also, for 15 inch screen, add 40 to the y coordinate for 'Loan Details', 'Take Loans', 'Deposit Money', 'Withdraw Money', 'Log Out' buttons.
+##Change the above as required.
 
 from tkinter import *
 
@@ -318,7 +318,7 @@ def Window1_Function():
                 BackgroundImg.image = BG
                 WindowPic = PhotoImage(file="LoanChoicesPic.png")
                 WindowImg = Label(window5, image=WindowPic)
-                WindowImg.place(x=200, y=120)  ######WindowImg size = 96x96
+                WindowImg.place(x=200, y=150)  ######WindowImg size = 96x96
                 WindowImg.image = WindowPic
                 # Display Current Time
                 QTime = "Select hour(curtime()),minute(curtime())"
