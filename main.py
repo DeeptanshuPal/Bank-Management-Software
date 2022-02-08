@@ -2,7 +2,7 @@ from tkinter import *
 
 import mysql.connector as sqltor
 
-con = sqltor.connect(host="localhost", user="root", passwd="", database="bank")
+con = sqltor.connect(host="localhost", user="root", passwd="R3d23@lnut", database="bank")
 if con.is_connected():
     print("Connection Successful...")
 
@@ -662,14 +662,8 @@ def Window1_Function():
                 # submit button
                 def DepositFunc():
                     d9 = str(DepositAmt_box9.get())
-                    if str(d9) == '':
-                        Invalid_Label = Label(window9,
-                                              text="Invalid Input!                   ",
-                                              fg="red",
-                                              font=("ariel", 15, "bold"))
-                        Invalid_Label.place(x=45, y=450)
-                    else:
-                        if d9.isdigit() and int(d9) > 0 and int(d9) <= 100000:
+                    if d9.isdigit():
+                        if int(d9) > 0 and int(d9) <= 100000:
                             q = "update bdetails set balance=balance+'{}' where username = '{}'".format(d9, U3)
                             cursor9 = con.cursor()
                             cursor9.execute(q)
@@ -687,6 +681,13 @@ def Window1_Function():
                                                   fg="red",
                                                   font=("ariel", 15, "bold"))
                             Invalid_Label.place(x=45, y=450)
+                    
+                    else:
+                        Invalid_Label = Label(window9,
+                                              text="Invalid Input!                   ",
+                                              fg="red",
+                                              font=("ariel", 15, "bold"))
+                        Invalid_Label.place(x=45, y=450)
 
                 submit9 = Button(window9,
                                  text="DEPOSIT & EXIT",
