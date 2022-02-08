@@ -2,7 +2,7 @@ from tkinter import *
 
 import mysql.connector as sqltor
 
-con = sqltor.connect(host="localhost", user="root", passwd="R3d23@lnut", database="bank")
+con = sqltor.connect(host="localhost", user="root", passwd="", database="bank")
 if con.is_connected():
     print("Connection Successful...")
 
