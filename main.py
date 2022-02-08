@@ -2,7 +2,7 @@ from tkinter import *
 
 import mysql.connector as sqltor
 
-con = sqltor.connect(host="localhost", user="root", passwd="saransql123", database="bank")
+con = sqltor.connect(host="localhost", user="root", passwd="R3d23@lnut", database="bank")
 if con.is_connected():
     print("Connection Successful...")
 
@@ -325,12 +325,22 @@ def Window1_Function():
                                                       fg="red",
                                                       font=("ariel", 15, "bold"))
                                 Invalid_Label.place(x=45, y=450)
+                                Blank = Label(window6,
+                                                  text="                                                                           ",
+                                                  fg="black",
+                                                  font=("ariel", 10, "bold"))
+                                Blank.place(x=45, y=480)
                             elif int(t6) > 15:
                                 MaxTime_Label = Label(window6,
-                                                      text="Max time is 15 years!",
+                                                      text="Max time is 15 years! ",
                                                       fg="red",
                                                       font=("ariel", 15, "bold"))
                                 MaxTime_Label.place(x=45, y=450)
+                                TimeBlank = Label(window6,
+                                                  text="                                                                              ",
+                                                  fg="black",
+                                                  font=("ariel", 10, "bold"))
+                                TimeBlank.place(x=45, y=480)
                             elif int(p6) > 5 * int(d):
                                 MaxHLoan_Label = Label(window6,
                                                        text="Loan Criteria not met!",
@@ -422,12 +432,22 @@ def Window1_Function():
                                                       fg="red",
                                                       font=("ariel", 15, "bold"))
                                 Invalid_Label.place(x=45, y=450)
+                                Blank = Label(window6,
+                                                  text="                                                                               ",
+                                                  fg="black",
+                                                  font=("ariel", 10, "bold"))
+                                Blank.place(x=45, y=480)
                             elif int(t7) > 10:
                                 MaxTime_Label = Label(window7,
-                                                      text="Max time is 10 years!",
+                                                      text="Max time is 10 years! ",
                                                       fg="red",
                                                       font=("ariel", 15, "bold"))
                                 MaxTime_Label.place(x=45, y=450)
+                                Blank = Label(window6,
+                                                  text="                                                                                   ",
+                                                  fg="black",
+                                                  font=("ariel", 10, "bold"))
+                                Blank.place(x=45, y=480)
                             elif int(p7) > 5 * int(d):
                                 MaxHLoan_Label = Label(window7,
                                                        text="Loan Criteria not met!",
@@ -518,12 +538,22 @@ def Window1_Function():
                                                       fg="red",
                                                       font=("ariel", 15, "bold"))
                                 Invalid_Label.place(x=45, y=450)
+                                Blank = Label(window6,
+                                                  text="                                                                        ",
+                                                  fg="black",
+                                                  font=("ariel", 10, "bold"))
+                                Blank.place(x=45, y=480)
                             elif int(t8) > 8:
                                 MaxTime_Label = Label(window8,
-                                                      text="Max time is 8 years!",
+                                                      text="Max time is 8 years! ",
                                                       fg="red",
                                                       font=("ariel", 15, "bold"))
                                 MaxTime_Label.place(x=45, y=450)
+                                Blank = Label(window6,
+                                                  text="                                                                        ",
+                                                  fg="black",
+                                                  font=("ariel", 10, "bold"))
+                                Blank.place(x=45, y=480)
                             elif int(p8) > 5 * int(d):
                                 MaxHLoan_Label = Label(window8,
                                                        text="Loan Criteria not met!",
@@ -536,8 +566,7 @@ def Window1_Function():
                                                         font=("ariel", 10, "bold"))
                                 MaxHLoan_Label2.place(x=45, y=480)
                             else:
-                                q = "UPDATE bdetails SET p_principal={},p_rate={},p_time={},p_date=curdate() where USERNAME='{}'".format(
-                                    p8, r8, t8, U3)
+                                q = "UPDATE bdetails SET p_principal={},p_rate={},p_time={},p_date=curdate() where USERNAME='{}'".format(p8, r8, t8, U3)
                                 cursor6 = con.cursor()
                                 cursor6.execute(q)
                                 con.commit()
@@ -726,7 +755,7 @@ def Window1_Function():
                             window10.destroy()
                     else:
                         Invalid_Label = Label(window10,
-                                              text="Invalid Input!",
+                                              text="Invalid Input!                        ",
                                               fg="red",
                                               font=("ariel", 15, "bold"))
                         Invalid_Label.place(x=45, y=350)
@@ -1173,16 +1202,23 @@ def Window1_Function():
             qry = ('select * from bdetails')
             cursor3.execute(qry)
             data = cursor3.fetchall()
-            for i in data:
-                if u3 == i[1] and p3 == i[2]:
-                    Window4_Function()
-                    break
-                else:
-                    Invalid_Label = Label(window3,
-                                          text="Invalid Username / Password!",
-                                          fg="red",
-                                          font=("ariel", 15, "bold"))
-                    Invalid_Label.place(x=45, y=350)
+            if data!=[]:
+                for i in data:
+                    if u3 == i[1] and p3 == i[2]:
+                        Window4_Function()
+                        break  
+                    else:
+                        Invalid_Label = Label(window3,
+                                              text="Invalid Username / Password!",
+                                              fg="red",
+                                              font=("ariel", 15, "bold"))
+                        Invalid_Label.place(x=45, y=350)
+            else:
+                Invalid_Label = Label(window3,
+                                      text="Invalid Username / Password!",
+                                      fg="red",
+                                      font=("ariel", 15, "bold"))
+                Invalid_Label.place(x=45, y=350)
 
         submit3 = Button(window3,
                          text="SUBMIT",
