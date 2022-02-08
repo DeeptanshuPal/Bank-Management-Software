@@ -2,6 +2,8 @@
 ##Background image for 13 inch screens is "MS_Background6.png"
 ##Background image for 15 inch screens is "MS_Background5.png"
 ##Change the above as required.
+##Also, for 15 inch screen, change font size to 15 and y coordinate to 85 everywhere CurTime is used (timeLabel).
+##Also, for 13 inch screen, change font size to 14 and y coordinate to 72 everywhere CurTime is used (timeLabel).
 
 from tkinter import *
 
