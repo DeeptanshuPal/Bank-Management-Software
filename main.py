@@ -2,7 +2,7 @@ from tkinter import *
 
 import mysql.connector as sqltor
 
-con = sqltor.connect(host="localhost", user="root", passwd="123456", database="bank")
+con = sqltor.connect(host="localhost", user="root", passwd="R3d23@lnut", database="bank")
 if con.is_connected():
     print("Connection Successful...")
 
@@ -373,7 +373,7 @@ def Window1_Function():
                     h_rate_box6.place(x=180, y=265)
                     # h_time label
                     h_time6 = Label(window6,
-                                    text=" Time           : ",
+                                    text=" Time(years) : ",
                                     font=("ariel", 15, "bold"))
                     h_time6.place(x=43, y=295)
                     # h_time display label
@@ -437,6 +437,11 @@ def Window1_Function():
                                                   fg="red",
                                                   font=("ariel", 15, "bold"))
                             Invalid_Label.place(x=45, y=450)
+                            Blank = Label(window6,
+                                                  text="                                                                           ",
+                                                  fg="black",
+                                                  font=("ariel", 10, "bold"))
+                            Blank.place(x=45, y=480)
 
                     submit6 = Button(window6,
                                      text="SUBMIT",
@@ -493,7 +498,7 @@ def Window1_Function():
                     c_rate_box7.place(x=180, y=265)
                     # c_time label
                     c_time7 = Label(window7,
-                                    text=" Time           : ",
+                                    text=" Time(years) : ",
                                     font=("ariel", 15, "bold"))
                     c_time7.place(x=43, y=295)
                     # c_time display label
@@ -555,6 +560,11 @@ def Window1_Function():
                                                   fg="red",
                                                   font=("ariel", 15, "bold"))
                             Invalid_Label.place(x=45, y=450)
+                            Blank = Label(window7,
+                                                  text="                                                                           ",
+                                                  fg="black",
+                                                  font=("ariel", 10, "bold"))
+                            Blank.place(x=45, y=480)
 
                     submit7 = Button(window7,
                                      text="SUBMIT",
@@ -611,7 +621,7 @@ def Window1_Function():
                     p_rate_box8.place(x=180, y=265)
                     # p_time label
                     p_time8 = Label(window8,
-                                    text=" Time           : ",
+                                    text=" Time(years) : ",
                                     font=("ariel", 15, "bold"))
                     p_time8.place(x=43, y=295)
                     # p_time display label
@@ -672,6 +682,11 @@ def Window1_Function():
                                                   fg="red",
                                                   font=("ariel", 15, "bold"))
                             Invalid_Label.place(x=45, y=450)
+                            Blank = Label(window8,
+                                                  text="                                                                           ",
+                                                  fg="black",
+                                                  font=("ariel", 10, "bold"))
+                            Blank.place(x=45, y=480)
 
                     submit8 = Button(window8,
                                      text="SUBMIT",
@@ -1016,7 +1031,7 @@ def Window1_Function():
 
                     ##Output
                     # MonthlyPay Label
-                    tpaymentLabel = Label(window12, text='TOTAL AMOUNT       :', font=("ariel", 15, "bold"))#THIS WAS AMOUNT TO BE PAID
+                    tpaymentLabel = Label(window12, text='TOTAL AMOUNT         :', font=("ariel", 15, "bold"))#THIS WAS AMOUNT TO BE PAID
                     tpaymentLabel.place(x=45, y=385)
                     mpaymentLabel = Label(window12, text='MONTHLY PAYMENT  :', font=("ariel", 15, "bold"))
                     mpaymentLabel.place(x=45, y=415)
