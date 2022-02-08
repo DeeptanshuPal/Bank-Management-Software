@@ -42,7 +42,8 @@ def Window1_Function():
     for i in dataT:
         hCurTime = i[0]
         mCurTime = i[1]
-    TimeVal1=str(hCurTime)+":"+str(mCurTime)
+        MCurTime = str(mCurTime).zfill(2)
+    TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
     timeLabel = Label(window1, text=TimeVal1, font=('arial black', 14,'bold'), bg='#a6a8a5',pady=0) ##make font size = 15 for 15 inch screen
     timeLabel.place(x=48,y=72)    ##make y=85 for 15 inch screen
 
@@ -68,7 +69,8 @@ def Window1_Function():
         for i in dataT:
             hCurTime = i[0]
             mCurTime = i[1]
-        TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+            MCurTime = str(mCurTime).zfill(2)
+        TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
         timeLabel = Label(window2, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
                           pady=0)  
         timeLabel.place(x=48, y=72)  
@@ -190,7 +192,8 @@ def Window1_Function():
         for i in dataT:
             hCurTime = i[0]
             mCurTime = i[1]
-        TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+            MCurTime = str(mCurTime).zfill(2)
+        TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
         timeLabel = Label(window3, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
                           pady=0)  
         timeLabel.place(x=48, y=72)  
@@ -241,7 +244,8 @@ def Window1_Function():
             for i in dataT:
                 hCurTime = i[0]
                 mCurTime = i[1]
-            TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+                MCurTime = str(mCurTime).zfill(2)
+            TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
             timeLabel = Label(window4, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
                               pady=0)  
             timeLabel.place(x=48, y=72) 
@@ -328,7 +332,8 @@ def Window1_Function():
                 for i in dataT:
                     hCurTime = i[0]
                     mCurTime = i[1]
-                TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+                    MCurTime = str(mCurTime).zfill(2)
+                TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
                 timeLabel = Label(window5, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
                                   pady=0)  
                 timeLabel.place(x=48, y=72)  
@@ -354,7 +359,8 @@ def Window1_Function():
                     for i in dataT:
                         hCurTime = i[0]
                         mCurTime = i[1]
-                    TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+                        MCurTime = str(mCurTime).zfill(2)
+                    TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
                     timeLabel = Label(window6, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
                                       pady=0) 
                     timeLabel.place(x=48, y=72)  
@@ -479,7 +485,8 @@ def Window1_Function():
                     for i in dataT:
                         hCurTime = i[0]
                         mCurTime = i[1]
-                    TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+                        MCurTime = str(mCurTime).zfill(2)
+                    TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
                     timeLabel = Label(window7, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
                                       pady=0)  
                     timeLabel.place(x=48, y=72)
@@ -602,7 +609,8 @@ def Window1_Function():
                     for i in dataT:
                         hCurTime = i[0]
                         mCurTime = i[1]
-                    TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+                        MCurTime = str(mCurTime).zfill(2)
+                    TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
                     timeLabel = Label(window8, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
                                       pady=0)
                     timeLabel.place(x=48, y=72) 
@@ -773,7 +781,8 @@ def Window1_Function():
                 for i in dataT:
                     hCurTime = i[0]
                     mCurTime = i[1]
-                TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+                    MCurTime = str(mCurTime).zfill(2)
+                TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
                 timeLabel = Label(window9, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
                                   pady=0)
                 timeLabel.place(x=48, y=72)
@@ -857,7 +866,8 @@ def Window1_Function():
                 for i in dataT:
                     hCurTime = i[0]
                     mCurTime = i[1]
-                TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+                    MCurTime = str(mCurTime).zfill(2)
+                TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
                 timeLabel = Label(window10, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
                                   pady=0)
                 timeLabel.place(x=48, y=72)
@@ -941,7 +951,8 @@ def Window1_Function():
                 for i in dataT:
                     hCurTime = i[0]
                     mCurTime = i[1]
-                TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+                    MCurTime = str(mCurTime).zfill(2)
+                TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
                 timeLabel = Label(window11, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
                                   pady=0)
                 timeLabel.place(x=48, y=72)
@@ -986,7 +997,8 @@ def Window1_Function():
                     for i in dataT:
                         hCurTime = i[0]
                         mCurTime = i[1]
-                    TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+                        MCurTime = str(mCurTime).zfill(2)
+                    TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
                     timeLabel = Label(window12, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
                                       pady=0)
                     timeLabel.place(x=48, y=72) 
@@ -1143,7 +1155,8 @@ def Window1_Function():
                     for i in dataT:
                         hCurTime = i[0]
                         mCurTime = i[1]
-                    TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+                        MCurTime = str(mCurTime).zfill(2)
+                    TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
                     timeLabel = Label(window13, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
                                       pady=0)
                     timeLabel.place(x=48, y=72)
@@ -1255,7 +1268,8 @@ def Window1_Function():
                     for i in dataT:
                         hCurTime = i[0]
                         mCurTime = i[1]
-                    TimeVal1 = str(hCurTime) + ":" + str(mCurTime)
+                        MCurTime = str(mCurTime).zfill(2)
+                    TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
                     timeLabel = Label(window14, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
                                       pady=0)
                     timeLabel.place(x=48, y=72)
