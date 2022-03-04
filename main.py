@@ -406,12 +406,12 @@ def Window1_Function():
                         if p6.isdigit() and t6.isdigit():
                             if p6 == '' or r6 == '' or t6 == '' or int(p6) == 0 or int(t6) == 0:
                                 Invalid_Label = Label(window6,
-                                                      text="Invalid Input!                          ",
+                                                      text="Invalid Input!                                  ",
                                                       fg="red",
                                                       font=("ariel", 15, "bold"))
                                 Invalid_Label.place(x=45, y=450)
                                 Blank = Label(window6,
-                                                  text="                                                                           ",
+                                                  text="                                                                                    ",
                                                   fg="black",
                                                   font=("ariel", 10, "bold"))
                                 Blank.place(x=45, y=480)
@@ -422,7 +422,7 @@ def Window1_Function():
                                                       font=("ariel", 15, "bold"))
                                 MaxTime_Label.place(x=45, y=450)
                                 TimeBlank = Label(window6,
-                                                  text="                                                                              ",
+                                                  text="                                                                                       ",
                                                   fg="black",
                                                   font=("ariel", 10, "bold"))
                                 TimeBlank.place(x=45, y=480)
@@ -447,12 +447,12 @@ def Window1_Function():
                                 window6.destroy()
                         else:
                             Invalid_Label = Label(window6,
-                                                  text="Invalid Input!                             ",
+                                                  text="Invalid Input!                                       ",
                                                   fg="red",
                                                   font=("ariel", 15, "bold"))
                             Invalid_Label.place(x=45, y=450)
                             Blank = Label(window6,
-                                                  text="                                                                           ",
+                                                  text="                                                                                    ",
                                                   fg="black",
                                                   font=("ariel", 10, "bold"))
                             Blank.place(x=45, y=480)
@@ -531,12 +531,12 @@ def Window1_Function():
                         if p7.isdigit() and t7.isdigit():
                             if p7 == '' or r7 == '' or t7 == '' or int(p7) == 0 or int(t7) == 0:
                                 Invalid_Label = Label(window7,
-                                                      text="Invalid Input!                       ",
+                                                      text="Invalid Input!                            ",
                                                       fg="red",
                                                       font=("ariel", 15, "bold"))
                                 Invalid_Label.place(x=45, y=450)
                                 Blank = Label(window7,
-                                                  text="                                                                               ",
+                                                  text="                                                                                       ",
                                                   fg="black",
                                                   font=("ariel", 10, "bold"))
                                 Blank.place(x=45, y=480)
@@ -547,7 +547,7 @@ def Window1_Function():
                                                       font=("ariel", 15, "bold"))
                                 MaxTime_Label.place(x=45, y=450)
                                 Blank = Label(window7,
-                                                  text="                                                                                   ",
+                                                  text="                                                                                         ",
                                                   fg="black",
                                                   font=("ariel", 10, "bold"))
                                 Blank.place(x=45, y=480)
@@ -571,12 +571,12 @@ def Window1_Function():
                                 window7.destroy()
                         else:
                             Invalid_Label = Label(window7,
-                                                  text="Invalid Input!                      ",
+                                                  text="Invalid Input!                             ",
                                                   fg="red",
                                                   font=("ariel", 15, "bold"))
                             Invalid_Label.place(x=45, y=450)
                             Blank = Label(window7,
-                                                  text="                                                                           ",
+                                                  text="                                                                                  ",
                                                   fg="black",
                                                   font=("ariel", 10, "bold"))
                             Blank.place(x=45, y=480)
@@ -655,12 +655,12 @@ def Window1_Function():
                         if p8.isdigit() and t8.isdigit():
                             if p8 == '' or r8 == '' or t8 == '' or int(p8) == 0 or int(t8) == 0:
                                 Invalid_Label = Label(window8,
-                                                      text="Invalid Input!                   ",
+                                                      text="Invalid Input!                           ",
                                                       fg="red",
                                                       font=("ariel", 15, "bold"))
                                 Invalid_Label.place(x=45, y=450)
                                 Blank = Label(window8,
-                                                  text="                                                                        ",
+                                                  text="                                                                                ",
                                                   fg="black",
                                                   font=("ariel", 10, "bold"))
                                 Blank.place(x=45, y=480)
@@ -694,12 +694,12 @@ def Window1_Function():
                                 window8.destroy()
                         else:
                             Invalid_Label = Label(window8,
-                                                  text="Invalid Input!                           ",
+                                                  text="Invalid Input!                               ",
                                                   fg="red",
                                                   font=("ariel", 15, "bold"))
                             Invalid_Label.place(x=45, y=450)
                             Blank = Label(window8,
-                                                  text="                                                                           ",
+                                                  text="                                                                              ",
                                                   fg="black",
                                                   font=("ariel", 10, "bold"))
                             Blank.place(x=45, y=480)
@@ -816,14 +816,14 @@ def Window1_Function():
                             Limit_Label.place(x=45, y=450)
                         else:
                             Invalid_Label = Label(window9,
-                                                  text="Invalid Input!                   ",
+                                                  text="Invalid Input!                       ",
                                                   fg="red",
                                                   font=("ariel", 15, "bold"))
                             Invalid_Label.place(x=45, y=450)
                     
                     else:
                         Invalid_Label = Label(window9,
-                                              text="Invalid Input!                   ",
+                                              text="Invalid Input!                        ",
                                               fg="red",
                                               font=("ariel", 15, "bold"))
                         Invalid_Label.place(x=45, y=450)
