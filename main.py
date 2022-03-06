@@ -1,4 +1,4 @@
-##This version is for 13 inch screens.
+##This version is for 15 inch screens.
 ##Background image for 13 inch screens is "MS_Background6.png"
 ##Background image for 15 inch screens is "MS_Background5.png"
 ##Also, for 15 inch screen, change font size to 15 and y coordinate to 85 everywhere CurTime is used (timeLabel).
@@ -10,7 +10,7 @@ from tkinter import *
 
 import mysql.connector as sqltor
 
-con = sqltor.connect(host="localhost", user="root", passwd="R3d23@lnut", database="bank")
+con = sqltor.connect(host="localhost", user="root", passwd="123456", database="bank")
 if con.is_connected():
     print("Connection Successful...")
 
@@ -18,12 +18,12 @@ if con.is_connected():
 def Window1_Function():
     ### (Window1)Welcome window
     window1 = Tk()
-    window1.geometry("495x800+0+0")  #####BG Image = 491x690
+    window1.geometry("495x800+0+0")  #####BG Image = 491x790
     window1.title("Welcome Page")
     # window1 icon and image
     icon = PhotoImage(file="Window_Thumbnail.png")
     logo = PhotoImage(file="Bank-Logo.png")
-    BG = PhotoImage(file="MS_Background6.png")
+    BG = PhotoImage(file="MS_Background5.png")
     BackgroundImg = Label(window1, image=BG)
     BackgroundImg.place(x=0, y=0)
     window1.iconphoto(True, icon)
@@ -34,7 +34,7 @@ def Window1_Function():
     bank_motto = Label(window1, text="We Understand Your World.", font=("Bahnschrift SemiLight", 15, 'italic', 'bold'),
                        fg="gray")
     bank_motto.place(x=133, y=210)
-    #Display Current Time
+    # Display Current Time
     QTime = "Select hour(curtime()),minute(curtime())"
     cursorT = con.cursor()
     cursorT.execute(QTime)
@@ -44,8 +44,9 @@ def Window1_Function():
         mCurTime = i[1]
         MCurTime = str(mCurTime).zfill(2)
     TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
-    timeLabel = Label(window1, text=TimeVal1, font=('arial black', 14,'bold'), bg='#a6a8a5',pady=0) ##make font size = 15 for 15 inch screen
-    timeLabel.place(x=48,y=72)    ##make y=85 for 15 inch screen
+    timeLabel = Label(window1, text=TimeVal1, font=('arial black', 15, 'bold'), bg='#a6a8a5',
+                      pady=0)  ##make font size=15 for 15 inch screen
+    timeLabel.place(x=48, y=85)  # make y=85 for 15 inch screen
 
     # Window1 Button Functions
     ## (Window2)Create Account window
@@ -71,9 +72,8 @@ def Window1_Function():
             mCurTime = i[1]
             MCurTime = str(mCurTime).zfill(2)
         TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
-        timeLabel = Label(window2, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
-                          pady=0)  
-        timeLabel.place(x=48, y=72)  
+        timeLabel = Label(window2, text=TimeVal1, font=('arial black', 15, 'bold'), bg='#a6a8a5', pady=0)
+        timeLabel.place(x=48, y=85)
 
         # Name label
         name2 = Label(window2,
@@ -129,26 +129,29 @@ def Window1_Function():
             data = cursor.fetchall()
             datalst = [item for t in data for item in t]
             if n2.isalnum() and u2.isalnum() and p2.isalnum() and b2.isdigit():
-                if u2 not in datalst:                    
-                    if int(b2)<1000:
+                if u2 not in datalst:
+                    if int(b2) < 1000:
                         Invalid_Label = Label(window2,
                                               text="Minimum deposit ₹1000!         ",
                                               fg="red",
                                               font=("ariel", 15, "bold"))
-                        Invalid_Label.place(x=45, y=450)                        
-                    elif int(b2)>1000000:
+                        Invalid_Label.place(x=45, y=450)
+                    elif int(b2) > 1000000:
                         Invalid_Label = Label(window2,
                                               text="Maximum deposit ₹1000000!",
                                               fg="red",
                                               font=("ariel", 15, "bold"))
                         Invalid_Label.place(x=45, y=450)
                     else:
-                        q = "INSERT INTO bdetails(NAME, USERNAME,PASSWD,BALANCE)values('{}','{}','{}',{})".format(n2,u2,p2,b2)                                                                                                                  
+                        q = "INSERT INTO bdetails(NAME, USERNAME,PASSWD,BALANCE)values('{}','{}','{}',{})".format(n2,
+                                                                                                                  u2,
+                                                                                                                  p2,
+                                                                                                                  b2)
                         cursor2 = con.cursor()
                         cursor2.execute(q)
                         con.commit()
-                        window2.destroy()                    
-                                            
+                        window2.destroy()
+
                 else:
                     Invalid_Label = Label(window2,
                                           text="Username already exists!",
@@ -158,7 +161,7 @@ def Window1_Function():
 
             else:
                 Invalid_Label = Label(window2,
-                                      text="Invalid Values!                               ",
+                                      text="Invalid Input!                               ",
                                       fg="red",
                                       font=("ariel", 15, "bold"))
                 Invalid_Label.place(x=45, y=450)
@@ -194,9 +197,8 @@ def Window1_Function():
             mCurTime = i[1]
             MCurTime = str(mCurTime).zfill(2)
         TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
-        timeLabel = Label(window3, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
-                          pady=0)  
-        timeLabel.place(x=48, y=72)  
+        timeLabel = Label(window3, text=TimeVal1, font=('arial black', 15, 'bold'), bg='#a6a8a5', pady=0)
+        timeLabel.place(x=48, y=85)
 
         # username label
         uname3 = Label(window3,
@@ -246,9 +248,8 @@ def Window1_Function():
                 mCurTime = i[1]
                 MCurTime = str(mCurTime).zfill(2)
             TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
-            timeLabel = Label(window4, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
-                              pady=0)  
-            timeLabel.place(x=48, y=72) 
+            timeLabel = Label(window4, text=TimeVal1, font=('arial black', 15, 'bold'), bg='#a6a8a5', pady=0)
+            timeLabel.place(x=48, y=85)
 
             # Window4 widgets
             # Name label
@@ -293,12 +294,12 @@ def Window1_Function():
                                      font=("ariel", 15, "bold"))
                 var2.set(b)
                 UsernameVal4.place(x=295, y=265)
-                # PasswordValue label                
-                k=len(c)
-                kl = k*'*'
+                # PasswordValue label
+                k = len(c)
+                kl = k * '*'
                 PasswdVal4 = Label(window4,
                                    text=kl,
-                                   font=("ariel", 15, "bold"))                                
+                                   font=("ariel", 15, "bold"))
                 PasswdVal4.place(x=295, y=295)
                 # BalanceValue label
                 var4 = StringVar()
@@ -334,10 +335,8 @@ def Window1_Function():
                     mCurTime = i[1]
                     MCurTime = str(mCurTime).zfill(2)
                 TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
-                timeLabel = Label(window5, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
-                                  pady=0)  
-                timeLabel.place(x=48, y=72)  
-
+                timeLabel = Label(window5, text=TimeVal1, font=('arial black', 15, 'bold'), bg='#a6a8a5', pady=0)
+                timeLabel.place(x=48, y=85)
 
                 ### (Window6)Home Loan Window
                 def Window6_Function():
@@ -361,9 +360,8 @@ def Window1_Function():
                         mCurTime = i[1]
                         MCurTime = str(mCurTime).zfill(2)
                     TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
-                    timeLabel = Label(window6, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
-                                      pady=0) 
-                    timeLabel.place(x=48, y=72)  
+                    timeLabel = Label(window6, text=TimeVal1, font=('arial black', 15, 'bold'), bg='#a6a8a5', pady=0)
+                    timeLabel.place(x=48, y=85)
 
                     # h_principal label
                     h_principal6 = Label(window6,
@@ -406,14 +404,14 @@ def Window1_Function():
                         if p6.isdigit() and t6.isdigit():
                             if p6 == '' or r6 == '' or t6 == '' or int(p6) == 0 or int(t6) == 0:
                                 Invalid_Label = Label(window6,
-                                                      text="Invalid Input!                                  ",
+                                                      text="Invalid Input!                                           ",
                                                       fg="red",
                                                       font=("ariel", 15, "bold"))
                                 Invalid_Label.place(x=45, y=450)
                                 Blank = Label(window6,
-                                                  text="                                                                                    ",
-                                                  fg="black",
-                                                  font=("ariel", 10, "bold"))
+                                              text="                                                                                 ",
+                                              fg="black",
+                                              font=("ariel", 10, "bold"))
                                 Blank.place(x=45, y=480)
                             elif int(t6) > 15:
                                 MaxTime_Label = Label(window6,
@@ -422,7 +420,7 @@ def Window1_Function():
                                                       font=("ariel", 15, "bold"))
                                 MaxTime_Label.place(x=45, y=450)
                                 TimeBlank = Label(window6,
-                                                  text="                                                                                       ",
+                                                  text="                                                                                    ",
                                                   fg="black",
                                                   font=("ariel", 10, "bold"))
                                 TimeBlank.place(x=45, y=480)
@@ -447,14 +445,14 @@ def Window1_Function():
                                 window6.destroy()
                         else:
                             Invalid_Label = Label(window6,
-                                                  text="Invalid Input!                                       ",
+                                                  text="Invalid Input!                                                ",
                                                   fg="red",
                                                   font=("ariel", 15, "bold"))
                             Invalid_Label.place(x=45, y=450)
                             Blank = Label(window6,
-                                                  text="                                                                                    ",
-                                                  fg="black",
-                                                  font=("ariel", 10, "bold"))
+                                          text="                                                                               ",
+                                          fg="black",
+                                          font=("ariel", 10, "bold"))
                             Blank.place(x=45, y=480)
 
                     submit6 = Button(window6,
@@ -487,9 +485,8 @@ def Window1_Function():
                         mCurTime = i[1]
                         MCurTime = str(mCurTime).zfill(2)
                     TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
-                    timeLabel = Label(window7, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
-                                      pady=0)  
-                    timeLabel.place(x=48, y=72)
+                    timeLabel = Label(window7, text=TimeVal1, font=('arial black', 15, 'bold'), bg='#a6a8a5', pady=0)
+                    timeLabel.place(x=48, y=85)
 
                     # c_principal label
                     c_principal7 = Label(window7,
@@ -531,14 +528,14 @@ def Window1_Function():
                         if p7.isdigit() and t7.isdigit():
                             if p7 == '' or r7 == '' or t7 == '' or int(p7) == 0 or int(t7) == 0:
                                 Invalid_Label = Label(window7,
-                                                      text="Invalid Input!                            ",
+                                                      text="Invalid Input!                                           ",
                                                       fg="red",
                                                       font=("ariel", 15, "bold"))
                                 Invalid_Label.place(x=45, y=450)
                                 Blank = Label(window7,
-                                                  text="                                                                                       ",
-                                                  fg="black",
-                                                  font=("ariel", 10, "bold"))
+                                              text="                                                                                 ",
+                                              fg="black",
+                                              font=("ariel", 10, "bold"))
                                 Blank.place(x=45, y=480)
                             elif int(t7) > 10:
                                 MaxTime_Label = Label(window7,
@@ -547,9 +544,9 @@ def Window1_Function():
                                                       font=("ariel", 15, "bold"))
                                 MaxTime_Label.place(x=45, y=450)
                                 Blank = Label(window7,
-                                                  text="                                                                                         ",
-                                                  fg="black",
-                                                  font=("ariel", 10, "bold"))
+                                              text="                                                                                        ",
+                                              fg="black",
+                                              font=("ariel", 10, "bold"))
                                 Blank.place(x=45, y=480)
                             elif int(p7) > 5 * int(d):
                                 MaxHLoan_Label = Label(window7,
@@ -571,14 +568,14 @@ def Window1_Function():
                                 window7.destroy()
                         else:
                             Invalid_Label = Label(window7,
-                                                  text="Invalid Input!                             ",
+                                                  text="Invalid Input!                                                ",
                                                   fg="red",
                                                   font=("ariel", 15, "bold"))
                             Invalid_Label.place(x=45, y=450)
                             Blank = Label(window7,
-                                                  text="                                                                                  ",
-                                                  fg="black",
-                                                  font=("ariel", 10, "bold"))
+                                          text="                                                                               ",
+                                          fg="black",
+                                          font=("ariel", 10, "bold"))
                             Blank.place(x=45, y=480)
 
                     submit7 = Button(window7,
@@ -611,9 +608,8 @@ def Window1_Function():
                         mCurTime = i[1]
                         MCurTime = str(mCurTime).zfill(2)
                     TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
-                    timeLabel = Label(window8, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
-                                      pady=0)
-                    timeLabel.place(x=48, y=72) 
+                    timeLabel = Label(window8, text=TimeVal1, font=('arial black', 15, 'bold'), bg='#a6a8a5', pady=0)
+                    timeLabel.place(x=48, y=85)
 
                     # p_principal label
                     p_principal8 = Label(window8,
@@ -655,14 +651,14 @@ def Window1_Function():
                         if p8.isdigit() and t8.isdigit():
                             if p8 == '' or r8 == '' or t8 == '' or int(p8) == 0 or int(t8) == 0:
                                 Invalid_Label = Label(window8,
-                                                      text="Invalid Input!                           ",
+                                                      text="Invalid Input!                                           ",
                                                       fg="red",
                                                       font=("ariel", 15, "bold"))
                                 Invalid_Label.place(x=45, y=450)
                                 Blank = Label(window8,
-                                                  text="                                                                                ",
-                                                  fg="black",
-                                                  font=("ariel", 10, "bold"))
+                                              text="                                                                                 ",
+                                              fg="black",
+                                              font=("ariel", 10, "bold"))
                                 Blank.place(x=45, y=480)
                             elif int(t8) > 8:
                                 MaxTime_Label = Label(window8,
@@ -671,9 +667,9 @@ def Window1_Function():
                                                       font=("ariel", 15, "bold"))
                                 MaxTime_Label.place(x=45, y=450)
                                 Blank = Label(window8,
-                                                  text="                                                                        ",
-                                                  fg="black",
-                                                  font=("ariel", 10, "bold"))
+                                              text="                                                                                        ",
+                                              fg="black",
+                                              font=("ariel", 10, "bold"))
                                 Blank.place(x=45, y=480)
                             elif int(p8) > 5 * int(d):
                                 MaxHLoan_Label = Label(window8,
@@ -687,21 +683,22 @@ def Window1_Function():
                                                         font=("ariel", 10, "bold"))
                                 MaxHLoan_Label2.place(x=45, y=480)
                             else:
-                                q = "UPDATE bdetails SET p_principal={},p_rate={},p_time={},p_date=curdate() where USERNAME='{}'".format(p8, r8, t8, U3)
+                                q = "UPDATE bdetails SET p_principal={},p_rate={},p_time={},p_date=curdate() where USERNAME='{}'".format(
+                                    p8, r8, t8, U3)
                                 cursor6 = con.cursor()
                                 cursor6.execute(q)
                                 con.commit()
                                 window8.destroy()
                         else:
                             Invalid_Label = Label(window8,
-                                                  text="Invalid Input!                               ",
+                                                  text="Invalid Input!                                                ",
                                                   fg="red",
                                                   font=("ariel", 15, "bold"))
                             Invalid_Label.place(x=45, y=450)
                             Blank = Label(window8,
-                                                  text="                                                                              ",
-                                                  fg="black",
-                                                  font=("ariel", 10, "bold"))
+                                          text="                                                                               ",
+                                          fg="black",
+                                          font=("ariel", 10, "bold"))
                             Blank.place(x=45, y=480)
 
                     submit8 = Button(window8,
@@ -746,7 +743,7 @@ def Window1_Function():
                                     bg="light grey",
                                     padx=35,
                                     command=Window5_Function)
-            TakeLoanButton.place(x=150, y=410)
+            TakeLoanButton.place(x=150, y=450)
 
             # Log out & Go Back to Home Screen Button
             def LogOutFunc():
@@ -758,7 +755,7 @@ def Window1_Function():
                                   bg="light grey",
                                   padx=50,
                                   command=LogOutFunc)
-            LogOutButton.place(x=150, y=560)
+            LogOutButton.place(x=150, y=600)
 
             ### (Window9)Deposit Balance Window
             def Window9_Function():
@@ -783,9 +780,8 @@ def Window1_Function():
                     mCurTime = i[1]
                     MCurTime = str(mCurTime).zfill(2)
                 TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
-                timeLabel = Label(window9, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
-                                  pady=0)
-                timeLabel.place(x=48, y=72)
+                timeLabel = Label(window9, text=TimeVal1, font=('arial black', 15, 'bold'), bg='#a6a8a5', pady=0)
+                timeLabel.place(x=48, y=85)
 
                 # Deposit Amount label
                 Deposit_Amt = Label(window9,
@@ -816,14 +812,14 @@ def Window1_Function():
                             Limit_Label.place(x=45, y=450)
                         else:
                             Invalid_Label = Label(window9,
-                                                  text="Invalid Input!                       ",
+                                                  text="Invalid Input!                   ",
                                                   fg="red",
                                                   font=("ariel", 15, "bold"))
                             Invalid_Label.place(x=45, y=450)
-                    
+
                     else:
                         Invalid_Label = Label(window9,
-                                              text="Invalid Input!                        ",
+                                              text="Invalid Input!                   ",
                                               fg="red",
                                               font=("ariel", 15, "bold"))
                         Invalid_Label.place(x=45, y=450)
@@ -843,7 +839,7 @@ def Window1_Function():
                                       bg="light grey",
                                       padx=20,
                                       command=Window9_Function)
-            DepositAmtButton.place(x=150, y=460)
+            DepositAmtButton.place(x=150, y=500)
 
             ### (Window10)Withdraw Balance Window
             def Window10_Function():
@@ -868,9 +864,8 @@ def Window1_Function():
                     mCurTime = i[1]
                     MCurTime = str(mCurTime).zfill(2)
                 TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
-                timeLabel = Label(window10, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
-                                  pady=0)
-                timeLabel.place(x=48, y=72)
+                timeLabel = Label(window10, text=TimeVal1, font=('arial black', 15, 'bold'), bg='#a6a8a5', pady=0)
+                timeLabel.place(x=48, y=85)
 
                 # Withdraw Amount label
                 Withdraw_Amt = Label(window10,
@@ -928,7 +923,7 @@ def Window1_Function():
                                        bg="light grey",
                                        padx=10,
                                        command=Window10_Function)
-            WithdrawAmtButton.place(x=150, y=510)
+            WithdrawAmtButton.place(x=150, y=550)
 
             ##(Window11)Loan Details Window
             def Window11_Function():
@@ -953,9 +948,8 @@ def Window1_Function():
                     mCurTime = i[1]
                     MCurTime = str(mCurTime).zfill(2)
                 TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
-                timeLabel = Label(window11, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
-                                  pady=0)
-                timeLabel.place(x=48, y=72)
+                timeLabel = Label(window11, text=TimeVal1, font=('arial black', 15, 'bold'), bg='#a6a8a5', pady=0)
+                timeLabel.place(x=48, y=85)
 
                 # h_principal label
                 H_LoanTakenLabel11 = Label(window11,
@@ -999,9 +993,8 @@ def Window1_Function():
                         mCurTime = i[1]
                         MCurTime = str(mCurTime).zfill(2)
                     TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
-                    timeLabel = Label(window12, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
-                                      pady=0)
-                    timeLabel.place(x=48, y=72) 
+                    timeLabel = Label(window12, text=TimeVal1, font=('arial black', 15, 'bold'), bg='#a6a8a5', pady=0)
+                    timeLabel.place(x=48, y=85)
 
                     # Labels
                     PLabel12 = Label(window12, text='LOAN TAKEN               :   ₹', font=("ariel", 15, "bold"))
@@ -1051,12 +1044,13 @@ def Window1_Function():
 
                     ##Output
                     # MonthlyPay Label
-                    tpaymentLabel = Label(window12, text='TOTAL AMOUNT         :', font=("ariel", 15, "bold"))#THIS WAS AMOUNT TO BE PAID
+                    tpaymentLabel = Label(window12, text='TOTAL AMOUNT         :',
+                                          font=("ariel", 15, "bold"))  # THIS WAS AMOUNT TO BE PAID
                     tpaymentLabel.place(x=45, y=385)
                     mpaymentLabel = Label(window12, text='MONTHLY PAYMENT  :', font=("ariel", 15, "bold"))
                     mpaymentLabel.place(x=45, y=415)
                     # MPVal Label
-                    if p!=None and r!=None and t!=None:                        
+                    if p != None and r != None and t != None:
                         Output1 = StringVar()
                         Output2 = StringVar()
                         p = float(p)
@@ -1064,7 +1058,7 @@ def Window1_Function():
                         t = float(t)
                         total = p * ((1 + (r / 100)) ** t)
                         mtotal = total / (t * 12)
-                        qhtotal = "update bdetails set h_total = {} where username = '{}'".format(total,U3)
+                        qhtotal = "update bdetails set h_total = {} where username = '{}'".format(total, U3)
                         '''qhtc = "select h_totcalc from bdetails where username = '{}'".format(U3)
                         cursor.execute(qhtc)                        
                         datahtc = cursor.fetchall()
@@ -1074,15 +1068,15 @@ def Window1_Function():
                         if vcheck==None: #or int(vcheck)<0
                             qhtotcalc = "update bdetails set h_totcalc = {} where username = '{}'".format(total,U3)
                             cursor.execute(qhtotcalc)
-                            con.commit()'''                            
-                            # output
+                            con.commit()'''
+                        # output
                         Output1.set("₹ " + str(round(total, 2)))
                         label1 = Label(window12, textvariable=Output1, font=("ariel", 15, "bold"))
                         label1.place(x=285, y=385)
                         Output2.set("₹ " + str(round(mtotal, 2)))
                         label2 = Label(window12, textvariable=Output2, font=("ariel", 15, "bold"))
                         label2.place(x=285, y=415)
-                                                    
+
                         '''else:                                              
                             # output
                             Output1.set("₹ " + str(round(hhtc, 2)))
@@ -1091,7 +1085,7 @@ def Window1_Function():
                             Output2.set("₹ " + str(round(mtotal, 2)))
                             label2 = Label(window12, textvariable=Output2, font=("ariel", 15, "bold"))
                             label2.place(x=285, y=415)'''
-                                            
+
                     # Close Window Button
                     def closewindow12():
                         window12.destroy()
@@ -1157,9 +1151,8 @@ def Window1_Function():
                         mCurTime = i[1]
                         MCurTime = str(mCurTime).zfill(2)
                     TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
-                    timeLabel = Label(window13, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
-                                      pady=0)
-                    timeLabel.place(x=48, y=72)
+                    timeLabel = Label(window13, text=TimeVal1, font=('arial black', 15, 'bold'), bg='#a6a8a5', pady=0)
+                    timeLabel.place(x=48, y=85)
 
                     # Labels
                     PLabel13 = Label(window13, text='LOAN TAKEN               :   ₹', font=("ariel", 15, "bold"))
@@ -1214,7 +1207,7 @@ def Window1_Function():
                     mpaymentLabel = Label(window13, text='MONTHLY PAYMENT  :', font=("ariel", 15, "bold"))
                     mpaymentLabel.place(x=45, y=415)
                     # MPVal Label
-                    if p!=None and r!=None and t!=None:                        
+                    if p != None and r != None and t != None:
                         Output1 = StringVar()
                         Output2 = StringVar()
                         p = float(p)
@@ -1270,9 +1263,8 @@ def Window1_Function():
                         mCurTime = i[1]
                         MCurTime = str(mCurTime).zfill(2)
                     TimeVal1 = str(hCurTime) + ":" + str(MCurTime)
-                    timeLabel = Label(window14, text=TimeVal1, font=('arial black', 14, 'bold'), bg='#a6a8a5',
-                                      pady=0)
-                    timeLabel.place(x=48, y=72)
+                    timeLabel = Label(window14, text=TimeVal1, font=('arial black', 15, 'bold'), bg='#a6a8a5', pady=0)
+                    timeLabel.place(x=48, y=85)
 
                     # Labels
                     PLabel14 = Label(window14, text='LOAN TAKEN               :   ₹', font=("ariel", 15, "bold"))
@@ -1327,7 +1319,7 @@ def Window1_Function():
                     mpaymentLabel = Label(window14, text='MONTHLY PAYMENT  :', font=("ariel", 15, "bold"))
                     mpaymentLabel.place(x=45, y=415)
                     # MPVal Label
-                    if p!=None and r!=None and t!=None:                        
+                    if p != None and r != None and t != None:
                         Output1 = StringVar()
                         Output2 = StringVar()
                         p = float(p)
@@ -1397,7 +1389,7 @@ def Window1_Function():
                                        bg="light grey",
                                        padx=28,
                                        command=Window11_Function)
-            LoanDetailsButton.place(x=150, y=355)
+            LoanDetailsButton.place(x=150, y=395)
 
         ## Checking function
         def LogInCheck():
@@ -1407,11 +1399,11 @@ def Window1_Function():
             qry = ('select * from bdetails')
             cursor3.execute(qry)
             data = cursor3.fetchall()
-            if data!=[]:
+            if data != []:
                 for i in data:
                     if u3 == i[1] and p3 == i[2]:
                         Window4_Function()
-                        break  
+                        break
                     else:
                         Invalid_Label = Label(window3,
                                               text="Invalid Username / Password!",
@@ -1452,5 +1444,3 @@ def Window1_Function():
 
 
 Window1_Function()
-
-
